@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>SAIZONE | UNIFIED ID SYSTEM</title>
+    <title>SAIZONE | DYNAMIC ID SYSTEM</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
@@ -49,7 +49,7 @@
 
         @keyframes pulseGlow {
             0%, 100% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.2); }
-            50% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.6); }
+            50% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
         }
 
         #aiBtn { position: fixed; bottom: 100px; left: 20px; width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: none; align-items: center; justify-content: center; z-index: 6000; box-shadow: 0 0 20px var(--glow-color); }
@@ -81,28 +81,19 @@
             
             <div class="card">
                 <div class="flex justify-between items-center">
-                    <div>
-                        <p class="text-[11px] text-gray-400 font-bold">الرصيد الكلي</p>
-                        <h3 class="text-4xl font-black text-blue-500">$<span id="pBalance">0.00</span></h3>
-                    </div>
+                    <div><p class="text-[11px] text-gray-400 font-bold">الرصيد الكلي</p><h3 class="text-4xl font-black text-blue-500">$<span id="pBalance">0.00</span></h3></div>
                     <span id="currentPlan" class="text-[10px] font-bold text-white bg-blue-600 px-4 py-1 rounded-full">No Plan</span>
                 </div>
                 
                 <div class="glow-box">
-                    <div class="flex flex-col">
-                        <span class="text-[8px] text-blue-400 uppercase font-bold mb-1">Invite Link</span>
-                        <span id="refLink" class="text-[10px] text-white font-mono truncate max-w-[180px]">---</span>
-                    </div>
+                    <div class="flex flex-col"><span class="text-[8px] text-blue-400 font-bold mb-1">Invite Link</span><span id="refLink" class="text-[10px] text-white font-mono truncate max-w-[180px]">---</span></div>
                     <button onclick="copyLink()" class="bg-blue-600 text-white text-[9px] px-4 py-2 rounded-xl font-black">COPY</button>
                 </div>
 
                 <div id="adminContainer" style="display:none;">
-                    <div class="glow-box border-dashed border-red-500 bg-red-500/5">
-                        <div class="flex flex-col">
-                            <span class="text-[8px] text-red-400 font-bold mb-1">Admin Panel</span>
-                            <span class="text-[10px] text-white font-black">Recharge System (8-Digits)</span>
-                        </div>
-                        <button onclick="openAdminPanel()" class="bg-red-600 text-white text-[9px] px-4 py-2 rounded-xl font-black">RECHARGE BY ID</button>
+                    <div class="glow-box border-dashed border-red-500 bg-red-500/5 mt-4">
+                        <div class="flex flex-col"><span class="text-[8px] text-red-400 font-bold mb-1">Admin Panel</span><span class="text-[10px] text-white font-black">System Recharge (2026xxxx)</span></div>
+                        <button onclick="openAdminPanel()" class="bg-red-600 text-white text-[9px] px-4 py-2 rounded-xl font-black italic">RECHARGE</button>
                     </div>
                 </div>
 
@@ -111,37 +102,10 @@
             <button onclick="logout()" class="w-full mt-6 py-3 text-red-500 text-[10px] font-bold uppercase border border-red-900/30 rounded-xl bg-red-500/5">Logout Account</button>
         </div>
 
-        <div id="plansPage" class="page">
-            <h3 class="text-center text-[12px] text-gray-500 mb-6 font-black uppercase">Investment Plans</h3>
-            <div id="plansList" class="space-y-4"></div>
-        </div>
-
-        <div id="miningPage" class="page">
-            <div class="card text-center py-20 mt-10">
-                <i class="fa-solid fa-microchip text-4xl text-blue-500 mb-4"></i>
-                <h3 class="font-black">Cloud Mining</h3>
-                <button onclick="doMining()" id="mineBtn" class="bg-blue-600 text-white w-44 mx-auto block py-3 rounded-full text-[10px] mt-8 font-black shadow-lg">Start Mining</button>
-            </div>
-        </div>
-
-        <div id="depositPage" class="page">
-            <div class="card text-center">
-                <h3 class="font-black text-blue-500 mb-4 uppercase">Recharge / إيداع</h3>
-                <div class="bg-black p-3 rounded-lg text-[9px] text-blue-400 border border-blue-900 mb-6 font-mono">TTmVnVwGtMm11BkxJA7LYitCgfTqoSN8dw</div>
-                <input type="text" placeholder="Wallet Address" class="w-full bg-zinc-900 p-4 rounded-xl text-center mb-3 outline-none border border-zinc-800 text-xs text-white">
-                <input type="number" id="depAmt" placeholder="Amount ($)" class="w-full bg-zinc-900 p-4 rounded-xl text-center mb-3 outline-none border border-zinc-800 text-xs text-white">
-                <button onclick="showToast('Request Sent! ✅')" class="w-full bg-blue-600 py-4 rounded-xl font-bold mt-4">Confirm Deposit</button>
-            </div>
-        </div>
-
-        <div id="withdrawPage" class="page">
-            <div class="card text-center">
-                <h3 class="font-black text-gray-400 mb-4 uppercase">Withdraw / سحب</h3>
-                <input type="text" id="witAddr" placeholder="USDT TRC20 Address" class="w-full bg-zinc-900 p-4 rounded-xl text-center mb-3 outline-none border border-zinc-800 text-xs text-white">
-                <input type="number" id="witAmt" placeholder="Amount ($)" class="w-full bg-zinc-900 p-4 rounded-xl text-center mb-3 outline-none border border-zinc-800 text-xs text-white">
-                <button onclick="showToast('Withdrawal Pending ✅')" class="w-full bg-blue-600 py-4 rounded-xl font-bold mt-4">Request Payout</button>
-            </div>
-        </div>
+        <div id="plansPage" class="page"><h3 class="text-center text-[12px] text-gray-500 mb-6 font-black uppercase tracking-widest">Investment Plans</h3><div id="plansList" class="space-y-4"></div></div>
+        <div id="miningPage" class="page"><div class="card text-center py-20 mt-10"><i class="fa-solid fa-microchip text-4xl text-blue-500 mb-4"></i><h3 class="font-black">Cloud Mining</h3><button onclick="doMining()" id="mineBtn" class="bg-blue-600 text-white w-44 mx-auto block py-3 rounded-full text-[10px] mt-8 font-black shadow-lg">Start Mining</button></div></div>
+        <div id="depositPage" class="page"><div class="card text-center"><h3 class="font-black text-blue-500 mb-4 uppercase">Recharge / إيداع</h3><div class="bg-black p-3 rounded-lg text-[9px] text-blue-400 border border-blue-900 mb-6 font-mono">TTmVnVwGtMm11BkxJA7LYitCgfTqoSN8dw</div><input type="number" id="depAmt" placeholder="Amount ($)" class="w-full bg-zinc-900 p-4 rounded-xl text-center mb-3 outline-none border border-zinc-800 text-xs text-white"><button onclick="showToast('Request Sent! ✅')" class="w-full bg-blue-600 py-4 rounded-xl font-bold mt-4">Confirm Deposit</button></div></div>
+        <div id="withdrawPage" class="page"><div class="card text-center"><h3 class="font-black text-gray-400 mb-4 uppercase">Withdraw / سحب</h3><input type="text" id="witAddr" placeholder="USDT TRC20 Address" class="w-full bg-zinc-900 p-4 rounded-xl text-center mb-3 outline-none border border-zinc-800 text-xs text-white"><input type="number" id="witAmt" placeholder="Amount ($)" class="w-full bg-zinc-900 p-4 rounded-xl text-center mb-3 outline-none border border-zinc-800 text-xs text-white"><button onclick="showToast('Withdrawal Pending ✅')" class="w-full bg-blue-600 py-4 rounded-xl font-bold mt-4">Request Payout</button></div></div>
 
         <nav id="bottomNav">
             <div class="nav-item active" onclick="tabNav(this, 'profilePage')"><i class="fa-solid fa-user mb-1"></i><br>Profile</div>
@@ -161,10 +125,14 @@
             const p = document.getElementById('password').value;
             if(!e || !p) return showToast("Fill all fields");
             
-            // نظام الـ ID الموحد: 8 أرقام تبدأ بـ 2026
-            if(!userData || String(userData.id).length < 8) {
-                const newId = Math.floor(20260000 + Math.random() * 99999);
+            // --- التعديل الجوهري: توليد ID جديد في كل مرة ---
+            const newId = Math.floor(20260000 + Math.random() * 99999);
+            
+            if(!userData) {
                 userData = { email: e, name: e.split('@')[0], balance: 0, daily: 0, plan: "No Plan", lastMine: "", id: newId };
+            } else {
+                // تحديث الـ ID فقط مع الحفاظ على الرصيد والبيانات الأخرى
+                userData.id = newId;
             }
             
             document.getElementById('authPage').style.display = 'none';
@@ -185,26 +153,23 @@
             document.getElementById('pBalance').innerText = userData.balance.toFixed(2);
             document.getElementById('userNameDisplay').innerText = userData.name;
             document.getElementById('userIdDisplay').innerText = "UID: " + userData.id;
-            document.getElementById('refLink').innerText = window.location.origin + window.location.pathname + "?ref=" + userData.id;
+            document.getElementById('currentPlan').innerText = userData.plan;
+            document.getElementById('refLink').innerText = window.location.origin + "/?ref=" + userData.id;
         }
 
-        // توحيد التحقق من الـ ID في لوحة المدير ليكون 8 أرقام
         function openAdminPanel() {
-            const inputId = prompt("أدخل رقم الـ ID الخاص بالمستخدم (8 أرقام):");
-            if (!inputId) return;
+            const targetId = prompt("أدخل رقم الـ ID الحالي الظاهر في الشاشة:");
+            if (!targetId) return;
 
-            // التأكد من تطابق الرقم المدخل مع رقم المستخدم المسجل حالياً
-            if (parseInt(inputId) === userData.id) {
-                const amount = parseFloat(prompt("أدخل المبلغ المراد تعبئته ($):"));
+            if (String(targetId) === String(userData.id)) {
+                const amount = parseFloat(prompt("أدخل المبلغ ($):"));
                 if (!isNaN(amount) && amount > 0) {
                     userData.balance += amount;
                     save();
-                    showToast(`تم شحن $${amount} للـ ID: ${inputId} بنجاح! ✅`);
-                } else {
-                    alert("خطأ في المبلغ.");
-                }
+                    showToast(`تم شحن $${amount} للـ ID: ${targetId} ✅`);
+                } else { alert("مبلغ خاطئ"); }
             } else {
-                alert("خطأ: الـ ID المدخل (" + inputId + ") غير موجود.");
+                alert("خطأ: الـ ID المدخل غير متطابق مع الـ ID الحالي.");
             }
         }
 
@@ -222,7 +187,7 @@
             plans.forEach(pl => {
                 list.innerHTML += `
                 <div class="card p-4 border border-zinc-800 flex flex-col items-center">
-                    <img src="${pl.i}" class="w-20 h-20 object-cover rounded-xl mb-4">
+                    <img src="${pl.i}" class="w-16 h-16 object-cover rounded-xl mb-3">
                     <h4 class="text-blue-500 font-black">${pl.n}</h4>
                     <p class="text-[9px] text-zinc-500">$${pl.p} | $${pl.d} Daily</p>
                     <button onclick="buyPlan('${pl.n}', ${pl.p}, ${pl.d})" class="bg-blue-600 text-white mt-4 py-2 w-32 rounded-full font-bold text-[9px]">Activate</button>
@@ -242,20 +207,18 @@
             userData.balance += userData.daily; userData.lastMine = today; save(); showToast("Collected! ✅");
         }
 
-        function logout() { localStorage.clear(); window.location.replace(window.location.origin + window.location.pathname); }
+        function logout() { localStorage.clear(); location.replace(location.href); }
         function tabNav(el, p) {
             document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             document.getElementById(p).classList.add('active'); el.classList.add('active');
         }
         function showToast(m) { const t = document.getElementById('toast'); t.innerText = m; t.style.display = 'block'; setTimeout(()=>t.style.display='none', 3000); }
-        function copyLink() { 
-            const link = document.getElementById('refLink').innerText;
-            navigator.clipboard.writeText(link).then(()=>showToast("Copied! ✅"));
-        }
+        function copyLink() { navigator.clipboard.writeText(document.getElementById('refLink').innerText).then(()=>showToast("Copied! ✅")); }
         
         initPlans();
-        window.onload = () => { if(userData && String(userData.id).length >= 8) handleLogin(); };
+        // التشغيل التلقائي عند التحديث لتوليد ID جديد دائماً
+        window.onload = () => { if(userData) handleLogin(); };
     </script>
 </body>
 </html>
