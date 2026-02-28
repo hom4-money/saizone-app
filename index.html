@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>SAIZONE | DYNAMIC ID SYSTEM</title>
+    <title>SAIZONE | FIXED ID SYSTEM</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
@@ -92,7 +92,7 @@
 
                 <div id="adminContainer" style="display:none;">
                     <div class="glow-box border-dashed border-red-500 bg-red-500/5 mt-4">
-                        <div class="flex flex-col"><span class="text-[8px] text-red-400 font-bold mb-1">Admin Panel</span><span class="text-[10px] text-white font-black">System Recharge (2026xxxx)</span></div>
+                        <div class="flex flex-col"><span class="text-[8px] text-red-400 font-bold mb-1">Admin Panel</span><span class="text-[10px] text-white font-black">System Recharge (8-Digits)</span></div>
                         <button onclick="openAdminPanel()" class="bg-red-600 text-white text-[9px] px-4 py-2 rounded-xl font-black italic">RECHARGE</button>
                     </div>
                 </div>
@@ -125,14 +125,10 @@
             const p = document.getElementById('password').value;
             if(!e || !p) return showToast("Fill all fields");
             
-            // --- التعديل الجوهري: توليد ID جديد في كل مرة ---
-            const newId = Math.floor(20260000 + Math.random() * 99999);
-            
-            if(!userData) {
-                userData = { email: e, name: e.split('@')[0], balance: 0, daily: 0, plan: "No Plan", lastMine: "", id: newId };
-            } else {
-                // تحديث الـ ID فقط مع الحفاظ على الرصيد والبيانات الأخرى
-                userData.id = newId;
+            // إصلاح وتثبيت الـ ID المكون من 8 أرقام
+            if(!userData || String(userData.id).length < 8 || userData.id == "undefined") {
+                const fixedId = Math.floor(20260000 + Math.random() * 99999);
+                userData = { email: e, name: e.split('@')[0], balance: 0, daily: 0, plan: "No Plan", lastMine: "", id: fixedId };
             }
             
             document.getElementById('authPage').style.display = 'none';
@@ -157,19 +153,21 @@
             document.getElementById('refLink').innerText = window.location.origin + "/?ref=" + userData.id;
         }
 
+        // لوحة المدير الموثوقة (ID ثابت وشحن فعال)
         function openAdminPanel() {
-            const targetId = prompt("أدخل رقم الـ ID الحالي الظاهر في الشاشة:");
+            const targetId = prompt("أدخل رقم الـ ID الحالي (8 أرقام):");
             if (!targetId) return;
 
+            // التحقق الدقيق باستخدام String لضمان المطابقة
             if (String(targetId) === String(userData.id)) {
-                const amount = parseFloat(prompt("أدخل المبلغ ($):"));
+                const amount = parseFloat(prompt("أدخل المبلغ المراد إضافته ($):"));
                 if (!isNaN(amount) && amount > 0) {
                     userData.balance += amount;
                     save();
-                    showToast(`تم شحن $${amount} للـ ID: ${targetId} ✅`);
-                } else { alert("مبلغ خاطئ"); }
+                    showToast(`تمت إضافة $${amount} بنجاح ✅`);
+                } else { alert("مبلغ غير صحيح"); }
             } else {
-                alert("خطأ: الـ ID المدخل غير متطابق مع الـ ID الحالي.");
+                alert("خطأ: الـ ID المدخل (" + targetId + ") لا يطابق المستخدم الحالي.");
             }
         }
 
@@ -203,11 +201,11 @@
         function doMining() {
             if(userData.daily <= 0) return showToast("No Plan");
             const today = new Date().toDateString();
-            if(userData.lastMine === today) return showToast("Already Mined Today");
+            if(userData.lastMine === today) return showToast("Already Mined");
             userData.balance += userData.daily; userData.lastMine = today; save(); showToast("Collected! ✅");
         }
 
-        function logout() { localStorage.clear(); location.replace(location.href); }
+        function logout() { localStorage.clear(); location.reload(); }
         function tabNav(el, p) {
             document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -217,8 +215,7 @@
         function copyLink() { navigator.clipboard.writeText(document.getElementById('refLink').innerText).then(()=>showToast("Copied! ✅")); }
         
         initPlans();
-        // التشغيل التلقائي عند التحديث لتوليد ID جديد دائماً
-        window.onload = () => { if(userData) handleLogin(); };
+        window.onload = () => { if(userData && String(userData.id).length >= 8) handleLogin(); };
     </script>
 </body>
 </html>
