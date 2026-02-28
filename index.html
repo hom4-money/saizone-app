@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>SAIZONE | 5 PLANS EDITION</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SAIZONE | UNIVERSAL COMPATIBILITY</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
@@ -11,16 +12,22 @@
 
     <style>
         :root { --bg: #050505; --card: #111111; --accent: #3b82f6; --glow-color: rgba(59, 130, 246, 0.6); }
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Cairo', sans-serif; }
+        * { 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent; 
+            font-family: 'Cairo', sans-serif; 
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; background: var(--bg); color: white; overflow: hidden; }
         
         #authPage {
             position: fixed; inset: 0;
             background: url('https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=2000') no-repeat center center fixed;
-            background-size: cover; display: flex; align-items: center; justify-content: center; z-index: 10000;
+            background-size: cover; display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center; z-index: 10000;
         }
         .login-card {
-            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(25px);
+            background: rgba(0, 0, 0, 0.85); -webkit-backdrop-filter: blur(25px); backdrop-filter: blur(25px);
             width: 88%; max-width: 380px; padding: 45px 25px; border-radius: 28px;
             border: 1px solid rgba(255, 255, 255, 0.1); text-align: center;
         }
@@ -29,17 +36,17 @@
             width: 100%; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 30px; padding: 12px 15px 12px 45px; color: #fff; outline: none; text-align: right; font-size: 14px;
         }
-        .input-group i { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.4); }
+        .input-group i { position: absolute; right: 20px; top: 50%; -webkit-transform: translateY(-50%); transform: translateY(-50%); color: rgba(255,255,255,0.4); }
         
-        .page { display: none; height: 100dvh; padding: 20px; overflow-y: auto; padding-bottom: 120px; }
-        .page.active { display: block; animation: fadeIn 0.3s; }
+        .page { display: none; height: 100dvh; padding: 20px; overflow-y: auto; padding-bottom: 120px; -webkit-overflow-scrolling: touch; }
+        .page.active { display: block; -webkit-animation: fadeIn 0.3s; animation: fadeIn 0.3s; }
         .card { background: var(--card); border-radius: 24px; padding: 20px; margin-bottom: 20px; border: 1px solid #1f1f1f; }
         
-        nav { position: fixed; bottom: 0; width: 100%; background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(15px); display: none; justify-content: space-around; padding: 15px 0; border-top: 1px solid #1f1f1f; z-index: 5000; }
+        nav { position: fixed; bottom: 0; width: 100%; background: rgba(10, 10, 10, 0.98); -webkit-backdrop-filter: blur(15px); backdrop-filter: blur(15px); display: none; -webkit-justify-content: space-around; justify-content: space-around; padding: 15px 0; border-top: 1px solid #1f1f1f; z-index: 5000; }
         .nav-item { color: #4b5563; font-size: 10px; text-align: center; flex: 1; cursor: pointer; }
         .nav-item.active { color: var(--accent); font-weight: 900; }
         
-        #toast { position: fixed; top: 30px; left: 50%; transform: translateX(-50%); background: #fff; color: #000; padding: 8px 20px; border-radius: 50px; z-index: 100000; display: none; font-weight: 900; font-size: 10px; }
+        #toast { position: fixed; top: 30px; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); background: #fff; color: #000; padding: 8px 20px; border-radius: 50px; z-index: 100000; display: none; font-weight: 900; font-size: 10px; }
         
         .plan-img { width: 80px; height: 80px; object-fit: cover; border-radius: 18px; margin: 0 auto; border: 2px solid #1f1f1f; }
 
@@ -47,8 +54,14 @@
             background: rgba(59, 130, 246, 0.05);
             border: 1px solid var(--accent);
             border-radius: 18px; padding: 14px;
-            display: flex; align-items: center; justify-content: space-between;
-            margin-top: 15px; animation: pulseGlow 2s infinite;
+            display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: space-between; justify-content: space-between;
+            margin-top: 15px; -webkit-animation: pulseGlow 2s infinite; animation: pulseGlow 2s infinite;
+        }
+
+        @-webkit-keyframes pulseGlow {
+            0% { -webkit-box-shadow: 0 0 5px rgba(59, 130, 246, 0.2); box-shadow: 0 0 5px rgba(59, 130, 246, 0.2); }
+            50% { -webkit-box-shadow: 0 0 20px rgba(59, 130, 246, 0.6); box-shadow: 0 0 20px rgba(59, 130, 246, 0.6); }
+            100% { -webkit-box-shadow: 0 0 5px rgba(59, 130, 246, 0.2); box-shadow: 0 0 5px rgba(59, 130, 246, 0.2); }
         }
 
         @keyframes pulseGlow {
@@ -58,8 +71,10 @@
         }
 
         #adminContainer { display: none; }
-        #aiBtn { position: fixed; bottom: 100px; left: 20px; width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: none; align-items: center; justify-content: center; z-index: 6000; box-shadow: 0 0 20px var(--glow-color); }
-        #aiWindow { position: fixed; bottom: 160px; left: 20px; width: 280px; height: 380px; background: #0f0f0f; border: 1px solid #222; border-radius: 20px; display: none; flex-direction: column; z-index: 7000; overflow: hidden; }
+        #aiBtn { position: fixed; bottom: 100px; left: 20px; width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: none; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center; z-index: 6000; box-shadow: 0 0 20px var(--glow-color); }
+        #aiWindow { position: fixed; bottom: 160px; left: 20px; width: 280px; height: 380px; background: #0f0f0f; border: 1px solid #222; border-radius: 20px; display: none; -webkit-flex-direction: column; flex-direction: column; z-index: 7000; overflow: hidden; }
+        
+        @-webkit-keyframes fadeIn { from { opacity: 0; -webkit-transform: translateY(10px); transform: translateY(10px); } to { opacity: 1; -webkit-transform: translateY(0); transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
@@ -177,9 +192,19 @@
 
     <script>
         const MASTER_ADMIN = "abwk18468@gmail.com";
-        let userData = JSON.parse(localStorage.getItem('saizone_user')) || null;
+        let userData = null;
 
-        function save() { localStorage.setItem('saizone_user', JSON.stringify(userData)); updateUI(); }
+        try {
+            const saved = localStorage.getItem('saizone_user');
+            if(saved) userData = JSON.parse(saved);
+        } catch(e) { console.error("Storage Error", e); }
+
+        function save() { 
+            try {
+                localStorage.setItem('saizone_user', JSON.stringify(userData)); 
+                updateUI(); 
+            } catch(e) { console.error("Save Error", e); }
+        }
 
         function handleLogin() {
             const e = document.getElementById('email').value.trim().toLowerCase();
@@ -202,7 +227,7 @@
             document.getElementById('userNameDisplay').innerText = userData.name;
             document.getElementById('userIdDisplay').innerText = "UID: " + userData.id;
             document.getElementById('currentPlan').innerText = userData.plan;
-            document.getElementById('refLink').innerText = window.location.origin + "/?ref=" + userData.id;
+            document.getElementById('refLink').innerText = window.location.origin + window.location.pathname + "?ref=" + userData.id;
         }
 
         function openAdminPanel() {
@@ -213,7 +238,6 @@
             } else { alert("UID error."); }
         }
 
-        // المصفوفة المحدثة بـ 5 باقات
         const plans = [
             { n: "Starter", p: 10, d: 0.20, i: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=400" },
             { n: "Silver", p: 50, d: 1.25, i: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?q=80&w=400" },
@@ -222,17 +246,20 @@
             { n: "VIP Diamond", p: 1000, d: 45.00, i: "https://images.unsplash.com/photo-1614332287897-cdc485fa562d?q=80&w=400" }
         ];
 
-        plans.forEach(pl => {
-            document.getElementById('plansList').innerHTML += `
-            <div class="card p-4 border border-zinc-800 flex flex-col items-center">
-                <img src="${pl.i}" class="plan-img mb-4">
-                <div class="text-center">
-                    <h4 class="text-blue-500 font-black">${pl.n}</h4>
-                    <p class="text-[9px] text-zinc-500 mt-1">$${pl.p} | $${pl.d} Daily</p>
-                    <button onclick="buyPlan('${pl.n}', ${pl.p}, ${pl.d})" class="bg-blue-600 text-white mt-4 py-2 w-32 rounded-full font-bold text-[9px]">Activate</button>
-                </div>
-            </div>`;
-        });
+        const plList = document.getElementById('plansList');
+        if(plList) {
+            plans.forEach(pl => {
+                plList.innerHTML += `
+                <div class="card p-4 border border-zinc-800 flex flex-col items-center">
+                    <img src="${pl.i}" class="plan-img mb-4">
+                    <div class="text-center">
+                        <h4 class="text-blue-500 font-black">${pl.n}</h4>
+                        <p class="text-[9px] text-zinc-500 mt-1">$${pl.p} | $${pl.d} Daily</p>
+                        <button onclick="buyPlan('${pl.n}', ${pl.p}, ${pl.d})" class="bg-blue-600 text-white mt-4 py-2 w-32 rounded-full font-bold text-[9px]">Activate</button>
+                    </div>
+                </div>`;
+            });
+        }
 
         function buyPlan(n, p, d) {
             if(userData.balance < p) return showToast("Low Balance");
@@ -246,15 +273,36 @@
             userData.balance += userData.daily; userData.lastMine = today; save(); showToast("Success! ✅");
         }
 
-        function logout() { localStorage.clear(); window.location.href = window.location.pathname; }
+        function logout() { 
+            localStorage.clear(); 
+            window.location.replace(window.location.origin + window.location.pathname);
+        }
+
         function tabNav(el, p) {
             document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            document.getElementById(p).classList.add('active'); el.classList.add('active');
+            const target = document.getElementById(p);
+            if(target) target.classList.add('active'); 
+            if(el) el.classList.add('active');
         }
+
         function showToast(m) { const t = document.getElementById('toast'); t.innerText = m; t.style.display = 'block'; setTimeout(()=>t.style.display='none', 3000); }
-        function copyLink() { navigator.clipboard.writeText(document.getElementById('refLink').innerText).then(()=>showToast("Copied! ✅")); }
+        function copyLink() { 
+            const link = document.getElementById('refLink').innerText;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(link).then(()=>showToast("Copied! ✅"));
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = link;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showToast("Copied! ✅");
+            }
+        }
         function toggleAI() { const w = document.getElementById('aiWindow'); w.style.display = w.style.display === 'flex' ? 'none' : 'flex'; }
+        
         window.onload = () => { if(userData) handleLogin(); };
     </script>
 </body>
