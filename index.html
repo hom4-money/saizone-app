@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SAIZONE | FULL RESTORED EDITION</title>
+    <title>SAIZONE | ADMIN ID RECHARGE</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
@@ -100,12 +100,12 @@
                 </div>
 
                 <div id="adminContainer" style="display:none;">
-                    <div class="glow-box border-dashed">
+                    <div class="glow-box border-dashed border-red-500 bg-red-500/5">
                         <div class="flex flex-col">
-                            <span class="text-[8px] text-blue-400 font-bold mb-1">Admin Access</span>
-                            <span class="text-[10px] text-white font-black">Control Panel Console</span>
+                            <span class="text-[8px] text-red-400 font-bold mb-1">Admin Panel</span>
+                            <span class="text-[10px] text-white font-black">Recharge System</span>
                         </div>
-                        <button onclick="openAdminPanel()" class="bg-white text-blue-600 text-[9px] px-4 py-2 rounded-xl font-black">MANAGE</button>
+                        <button onclick="openAdminPanel()" class="bg-red-600 text-white text-[9px] px-4 py-2 rounded-xl font-black">RECHARGE BY ID</button>
                     </div>
                 </div>
 
@@ -186,6 +186,26 @@
             document.getElementById('userNameDisplay').innerText = userData.name;
             document.getElementById('userIdDisplay').innerText = "UID: " + userData.id;
             document.getElementById('refLink').innerText = window.location.origin + window.location.pathname + "?ref=" + userData.id;
+        }
+
+        // لوحة المدير المعدلة: تعبئة عن طريق ID
+        function openAdminPanel() {
+            const inputId = prompt("أدخل رقم الـ ID الخاص بالمستخدم:");
+            if (!inputId) return;
+
+            // التحقق من صحة الـ ID (يجب أن يطابق ID المستخدم الحالي في هذا الكود المحلي)
+            if (parseInt(inputId) === userData.id) {
+                const amount = parseFloat(prompt("أدخل المبلغ المراد تعبئته ($):"));
+                if (!isNaN(amount) && amount > 0) {
+                    userData.balance += amount;
+                    save();
+                    showToast(`تمت إضافة $${amount} للـ ID: ${inputId} بنجاح! ✅`);
+                } else {
+                    alert("خطأ: مبلغ غير صحيح.");
+                }
+            } else {
+                alert("خطأ: لم يتم العثور على مستخدم بهذا الـ ID.");
+            }
         }
 
         const plans = [
