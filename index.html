@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>SAIZONE | ICON UPDATE</title>
+    <title>SAIZONE | FINAL STABLE PRO</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
@@ -29,25 +29,22 @@
         .theme-toggle { position: absolute; top: 20px; left: 20px; width: 40px; height: 40px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 6000; }
         #botBtn { position: fixed; bottom: 100px; right: 20px; width: 55px; height: 55px; background: #0088cc; border-radius: 50%; display: none; align-items: center; justify-content: center; z-index: 6000; box-shadow: 0 4px 20px rgba(0, 136, 204, 0.6); border: 2px solid white; }
         .input-style { width: 100%; background: rgba(120, 120, 120, 0.1); border: 1px solid var(--border); border-radius: 15px; padding: 12px; color: var(--text); outline: none; margin-bottom: 15px; text-align: center; font-size: 13px; }
-        
-        /* تنسيق أيقونات الباقات */
         .plan-icon-box { width: 75px; height: 75px; border-radius: 18px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--border); background: var(--bg); }
-
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="dark-mode">
 
-    <div id="toast" style="position: fixed; top: 30px; left: 50%; transform: translateX(-50%); background: #fff; color: #000; padding: 8px 20px; border-radius: 50px; z-index: 100000; display: none; font-weight: 900; font-size: 10px;"></div>
+    <div id="toast" style="position: fixed; top: 30px; left: 50%; transform: translateX(-50%); background: #fff; color: #000; padding: 8px 20px; border-radius: 50px; z-index: 100000; display: none; font-weight: 900; font-size: 10px; text-align: center;"></div>
     <div id="themeToggle" class="theme-toggle" onclick="toggleTheme()" style="display: none;"><i id="themeIcon" class="fa-solid fa-moon text-blue-500"></i></div>
-    <a href="https://t.me/Hassan20005pp_bot" id="botBtn" target="_blank"><i class="fa-solid fa-robot text-white text-xl"></i></a>
+    <a href="https://t.me/Hassan20005pp_bot" id="botBtn" target="_blank"><i class="fa-solid fa-headset text-white text-xl"></i></a>
 
     <div id="authPage" style="position: fixed; inset: 0; background: #050505; display: flex; align-items: center; justify-content: center; z-index: 10000;">
         <div style="width: 85%; text-align: center;">
-            <h2 class="text-4xl font-black mb-10 text-white italic">SAIZONE</h2>
+            <h2 class="text-4xl font-black mb-10 text-white italic tracking-tighter">SAIZONE</h2>
             <input type="email" id="email" placeholder="البريد الإلكتروني" class="input-style bg-zinc-900 border-zinc-800">
             <input type="password" id="password" placeholder="كلمة المرور" class="input-style bg-zinc-900 border-zinc-800">
-            <button onclick="handleLogin()" class="w-full bg-white text-black py-4 rounded-full font-black mt-4">تسجيل الدخول</button>
+            <button onclick="handleLogin()" class="w-full bg-blue-600 text-white py-4 rounded-full font-black mt-4 shadow-lg shadow-blue-600/20">تسجيل الدخول</button>
         </div>
     </div>
 
@@ -56,51 +53,51 @@
             <div class="card text-center border-b-4 border-blue-600">
                 <p class="text-[10px] text-blue-500 font-bold uppercase">Main Wallet</p>
                 <h2 id="userNameDisplay" class="font-black text-2xl uppercase mt-1">---</h2>
-                <p id="userIdDisplay" class="text-[11px] text-gray-400 font-mono italic">UID: 20260000</p>
+                <p id="userIdDisplay" class="text-[11px] text-gray-400 font-mono italic">UID: 00000000</p>
             </div>
+
+            <div onclick="copyFullRefLink()" style="background: #24A1DE; border-radius: 20px; padding: 15px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
+                <div style="display: flex; align-items: center; gap: 12px; width: 85%;">
+                    <div style="background: rgba(255,255,255,0.2); width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-link text-white text-lg"></i></div>
+                    <div style="overflow: hidden;">
+                        <p style="color: rgba(255,255,255,0.8); font-size: 10px; font-weight: bold; margin: 0;">رابط الإحالة المباشر</p>
+                        <h4 id="refLinkText" style="color: white; font-weight: 900; font-size: 11px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; direction: ltr;">---</h4>
+                    </div>
+                </div>
+                <i class="fa-regular fa-copy text-white/50 text-xl"></i>
+            </div>
+
             <div class="card">
                 <div class="flex justify-between items-center">
                     <div><p class="text-[11px] text-gray-400 font-bold">الرصيد الكلي</p><h3 class="text-4xl font-black text-blue-500">$<span id="pBalance">0.00</span></h3></div>
                     <span id="currentPlan" class="text-[10px] font-bold text-white bg-blue-600 px-4 py-1 rounded-full">No Plan</span>
                 </div>
-                <div style="background: rgba(59, 130, 246, 0.05); border: 1px solid var(--accent); border-radius: 18px; padding: 14px; display: flex; align-items: center; justify-content: space-between; margin-top: 15px;">
-                    <div class="flex flex-col overflow-hidden">
-                        <span class="text-[8px] text-blue-400 uppercase font-bold mb-1">Invite Link</span>
-                        <span id="refLinkDisplay" class="text-[10px] font-mono truncate max-w-[180px]">---</span>
-                    </div>
-                    <button onclick="copyRefLink()" class="bg-blue-600 text-white text-[9px] px-4 py-2 rounded-xl font-black">COPY</button>
+                
+                <div id="masterAdminPanel" style="display:none;" class="mt-4 p-4 border border-blue-500 bg-blue-600/10 rounded-2xl">
+                    <p class="text-blue-500 font-black text-[10px] mb-2 uppercase italic text-center">Master Admin Controls</p>
+                    <button onclick="masterAdminControl()" class="w-full bg-blue-600 text-white py-3 rounded-xl font-black text-xs uppercase">إدارة المستخدمين بالـ ID</button>
                 </div>
-                <div id="adminContainer" style="display:none;" class="mt-4 p-4 border border-dashed border-red-500 rounded-2xl bg-red-500/5">
-                    <button onclick="openAdminPanel()" class="w-full text-red-500 font-black text-xs uppercase italic">إضافة رصيد (Admin Only)</button>
-                </div>
+
+                <a href="https://t.me/Hassan20005pp_bot" target="_blank" class="block w-full text-center bg-blue-600/10 py-4 rounded-xl mt-4 border border-blue-500/20 text-blue-500">
+                    <i class="fa-solid fa-headset text-xl"></i>
+                </a>
             </div>
             <button onclick="logout()" class="w-full mt-4 py-3 text-red-500 text-[10px] font-bold uppercase border border-red-500/20 rounded-xl">تسجيل الخروج</button>
         </div>
 
-        <div id="plansPage" class="page">
-            <h3 class="text-center text-[12px] text-gray-500 mb-6 font-black uppercase tracking-widest">Investment Plans</h3>
-            <div id="plansList" class="grid grid-cols-1 gap-4"></div>
-        </div>
-
-        <div id="depositPage" class="page">
-            <div class="card text-center">
-                <h3 class="font-black text-blue-500 mb-6 text-sm">شحن المحفظة (USDT TRC20)</h3>
-                <div class="bg-zinc-800/50 p-4 rounded-2xl text-[10px] text-blue-400 border border-blue-500/20 mb-6 font-mono break-all">TTmVnVwGtMm11BkxJA7LYitCgfTqoSN8dw</div>
-                <input type="number" id="depAmount" placeholder="المبلغ المرسل ($)" class="input-style">
-                <button onclick="submitDeposit()" class="w-full bg-blue-600 py-4 rounded-xl font-bold text-white">تأكيد عملية الإيداع</button>
-            </div>
-        </div>
-
+        <div id="plansPage" class="page"><h3 class="text-center text-[12px] text-gray-500 mb-6 font-black uppercase tracking-widest">Investment Plans</h3><div id="plansList" class="grid grid-cols-1 gap-4"></div></div>
+        <div id="miningPage" class="page"><h3 class="text-center text-[12px] text-gray-500 mb-6 font-black uppercase tracking-widest">Mining Station</h3><div class="card text-center py-10"><div class="w-20 h-20 mx-auto bg-blue-600/10 rounded-full flex items-center justify-center mb-6 border border-blue-600 animate-pulse"><i class="fa-solid fa-bolt text-3xl text-blue-500"></i></div><h3 class="font-black mb-2">جلسة التعدين</h3><button onclick="doMining()" class="bg-blue-600 text-white px-10 py-3 rounded-full text-[12px] mt-6 font-black uppercase">ابدأ التعدين اليومي</button></div></div>
+        <div id="depositPage" class="page"><h3 class="text-center text-[12px] text-gray-500 mb-6 font-black uppercase tracking-widest">Deposit</h3><div class="card text-center"><div class="bg-zinc-800/50 p-4 rounded-2xl text-[10px] text-blue-400 border border-blue-500/20 mb-6 font-mono break-all">TTmVnVwGtMm11BkxJA7LYitCgfTqoSN8dw</div><input type="number" id="depAmount" placeholder="المبلغ ($)" class="input-style"><button onclick="submitDeposit()" class="w-full bg-blue-600 py-4 rounded-xl font-black text-white uppercase text-xs">تأكيد الإيداع</button></div></div>
+        
         <div id="withdrawPage" class="page">
+            <h3 class="text-center text-[12px] text-gray-500 mb-6 font-black uppercase tracking-widest">Withdraw</h3>
             <div class="card text-center">
-                <h3 class="font-black text-gray-400 mb-6 text-sm">سحب الأرباح</h3>
+                <p class="text-[10px] text-orange-500 font-bold mb-4 italic">⚠️ السحب متاح مرة كل 14 يوماً فقط</p>
                 <input type="text" id="witAddress" placeholder="عنوان المحفظة USDT TRC20" class="input-style">
-                <input type="number" id="witAmount" placeholder="المبلغ المطلوب سحبه ($)" class="input-style">
-                <button onclick="submitWithdraw()" class="w-full bg-blue-600 py-4 rounded-xl font-bold text-white">إرسال طلب السحب</button>
+                <input type="number" id="witAmount" placeholder="المبلغ ($)" class="input-style">
+                <button onclick="submitWithdraw()" class="w-full bg-blue-600 py-4 rounded-xl font-black text-white uppercase text-xs">إرسال طلب السحب</button>
             </div>
         </div>
-
-        <div id="miningPage" class="page"><div class="card text-center py-20 mt-10"><i class="fa-solid fa-bolt text-4xl text-blue-500 mb-4"></i><h3 class="font-black">Cloud Mining</h3><button onclick="doMining()" class="bg-blue-600 text-white w-44 mx-auto block py-3 rounded-full text-[10px] mt-8 font-black">ابدأ التعدين</button></div></div>
 
         <nav id="bottomNav">
             <div class="nav-item active" onclick="tabNav(this, 'profilePage')"><i class="fa-solid fa-user mb-1 text-lg"></i><br>Profile</div>
@@ -112,11 +109,11 @@
     </div>
 
     <script>
-        const TG_TOKEN = "8548855381:AAE0ENEyVbRHAq-w75gIqHK1TmKV6A1pSXo"; 
-        const TG_CHAT_ID = "8575658586"; 
         const MASTER_ADMIN = "abwk18468@gmail.com";
+        const TG_TOKEN = "8548855381:AAE0ENEyVbRHAq-w75gIqHK1TmKV6A1pSXo"; 
+        const TG_CHAT_ID = "8575658586";
         let userData = JSON.parse(localStorage.getItem('saizone_user'));
-        const dynamicRefCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+        const fullRefLink = window.location.origin + "/join/" + Math.random().toString(36).substring(7).toUpperCase();
 
         const plans = [
             { id: 1, n: "Bronze Core", p: 10, d: 0.20, icon: "fa-solid fa-seedling", color: "text-orange-700" },
@@ -124,54 +121,94 @@
             { id: 3, n: "Steel Will", p: 100, d: 2.70, icon: "fa-solid fa-dumbbell", color: "text-gray-300" },
             { id: 4, n: "Silver Spark", p: 250, d: 7.25, icon: "fa-solid fa-bolt", color: "text-zinc-400" },
             { id: 5, n: "Gold Rush", p: 500, d: 15.50, icon: "fa-solid fa-coins", color: "text-yellow-500" },
-            { n: "Platinum Edge", p: 1000, d: 33.00, i: "https://image_gen.g.aicloud/Platinum_Edge.png" },
-            { n: "Emerald Star", p: 2500, d: 87.50, i: "https://image_gen.g.aicloud/Emerald_Star.png" },
-            { n: "Sapphire Sky", p: 5000, d: 185.00, i: "https://image_gen.g.aicloud/Sapphire_Sky.png" },
-            { n: "Diamond Peak", p: 10000, d: 390.00, i: "https://image_gen.g.aicloud/Diamond_Peak.png" },
-            { n: "Pink Matrix", p: 50000, d: 2100.00, i: "https://image_gen.g.aicloud/Pink_Matrix.png" }
+            { id: 6, n: "Platinum Edge", p: 1000, d: 33.00, icon: "fa-solid fa-crown", color: "text-blue-300" },
+            { id: 7, n: "Emerald Star", p: 2500, d: 87.50, icon: "fa-solid fa-star", color: "text-green-500" },
+            { id: 8, n: "Sapphire Sky", p: 5000, d: 185.00, icon: "fa-solid fa-gem", color: "text-blue-600" },
+            { id: 9, n: "Diamond Peak", p: 10000, d: 390.00, icon: "fa-solid fa-mountain", color: "text-white" },
+            { id: 10, n: "Pink Matrix", p: 50000, d: 2100.00, icon: "fa-solid fa-atom", color: "text-pink-500" }
         ];
-
-        async function sendAdminNotification(msg) {
-            const url = `https://api.telegram.org/bot${TG_TOKEN}/sendMessage?chat_id=${TG_CHAT_ID}&text=${encodeURIComponent(msg)}&parse_mode=HTML`;
-            try { await fetch(url); } catch (e) {}
-        }
 
         function handleLogin() {
             const e = document.getElementById('email').value.trim().toLowerCase();
             const p = document.getElementById('password').value;
-            if(!e || !p) return showToast("يرجى ملء البيانات");
-            if(!userData) {
-                const fixedId = Math.floor(20260000 + Math.random() * 99999);
-                userData = { email: e, name: e.split('@')[0], balance: 0, daily: 0, plan: "No Plan", planId: 0, lastMine: "", id: fixedId };
+            if(!e || !p) return showToast("يرجى ملء كافة الحقول");
+
+            if(!userData || userData.email !== e) {
+                userData = { 
+                    email: e, name: e.split('@')[0], balance: 0, daily: 0, 
+                    plan: "No Plan", planId: 0, lastMine: "", 
+                    id: Math.floor(20260000 + Math.random() * 99999),
+                    lastWithdrawDate: "" // لتخزين تاريخ آخر سحب
+                };
             }
+            
+            save();
             document.getElementById('authPage').style.display = 'none';
             document.getElementById('mainApp').style.display = 'block';
             document.getElementById('bottomNav').style.display = 'flex';
             document.getElementById('botBtn').style.display = 'flex';
             document.getElementById('themeToggle').style.display = 'flex';
-            if(e === MASTER_ADMIN) document.getElementById('adminContainer').style.display = 'block';
+            
+            if(e === MASTER_ADMIN) document.getElementById('masterAdminPanel').style.display = 'block';
+            initPlans();
+            showToast("مرحباً بك " + userData.name);
+        }
+
+        // دالة السحب المحدثة بشرط الـ 14 يوم
+        async function submitWithdraw() {
+            const addr = document.getElementById('witAddress').value;
+            const amt = parseFloat(document.getElementById('witAmount').value);
+            
+            if(!addr || isNaN(amt) || amt < 5) return showToast("الحد الأدنى للسحب $5");
+            if(amt > userData.balance) return showToast("الرصيد غير كافٍ");
+
+            // التحقق من شرط الـ 14 يوم
+            const now = new Date().getTime();
+            if(userData.lastWithdrawDate) {
+                const lastWithdraw = new Date(userData.lastWithdrawDate).getTime();
+                const diffDays = Math.floor((now - lastWithdraw) / (1000 * 60 * 60 * 24));
+                
+                if(diffDays < 14) {
+                    return showToast(`عذراً، متبقي ${14 - diffDays} أيام لتتمكن من السحب مرة أخرى.`);
+                }
+            }
+
+            // إرسال الإشعار وتحديث البيانات
+            const msg = `⚠️ طلب سحب\n👤 المستخدم: ${userData.email}\n💰 المبلغ: $${amt}\n🆔 UID: ${userData.id}\n🏦 العنوان: ${addr}`;
+            await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage?chat_id=${TG_CHAT_ID}&text=${encodeURIComponent(msg)}`);
+            
+            userData.balance -= amt;
+            userData.lastWithdrawDate = new Date().toISOString(); // تحديث تاريخ السحب
             save();
+            
+            showToast("تم إرسال طلب السحب بنجاح ✅");
+            document.getElementById('witAmount').value = ""; document.getElementById('witAddress').value = "";
+        }
+
+        function masterAdminControl() {
+            const targetId = prompt("أدخل الـ UID للمستخدم:");
+            if(!targetId || targetId != userData.id) return showToast("UID غير مطابق للجلسة الحالية");
+            const action = prompt("UID: " + targetId + "\n1. إضافة رصيد\n2. تغيير الخطة (1-10)\n3. تصفير الحساب");
+            if(action == "1") {
+                const amt = parseFloat(prompt("المبلغ:"));
+                if(!isNaN(amt)) { userData.balance += amt; save(); showToast("تم التعديل ✅"); }
+            } else if(action == "2") {
+                const pId = parseInt(prompt("رقم المستوى (1-10):"));
+                const target = plans.find(pl => pl.id === pId);
+                if(target) { userData.plan = target.n; userData.planId = target.id; userData.daily = target.d; save(); initPlans(); showToast("تمت الترقية ✅"); }
+            } else if(action == "3") {
+                if(confirm("تصفير؟")) { userData.balance = 0; userData.plan = "No Plan"; userData.planId = 0; userData.daily = 0; userData.lastWithdrawDate = ""; save(); showToast("تم التصفير ✅"); }
+            }
         }
 
         function buyPlan(id, n, p, d) {
-            if(userData.planId >= id) return showToast("لا يمكنك الترقية لخطة اقل او مساوية");
-            
-            let currentPlanPrice = 0;
-            if(userData.planId > 0) {
-                const currentPlanObj = plans.find(pl => pl.id === userData.planId);
-                if(currentPlanObj) currentPlanPrice = currentPlanObj.p;
-            }
-            const upgradeCost = p - currentPlanPrice;
-
-            if(userData.balance < upgradeCost) return showToast(`تحتاج لـ $${upgradeCost.toFixed(2)} للترقية`);
-            
-            userData.balance -= upgradeCost;
-            userData.daily = d;
-            userData.plan = n;
-            userData.planId = id;
-            save();
-            showToast(`تم الترقية لـ ${n} ✅`);
-            initPlans();
+            if(userData.planId >= id) return showToast("لا يمكن الترقية لخطة أدنى");
+            let currP = 0;
+            if(userData.planId > 0) { const c = plans.find(pl => pl.id === userData.planId); if(c) currP = c.p; }
+            const cost = p - currP;
+            if(userData.balance < cost) return showToast("الرصيد غير كافٍ للترقية");
+            userData.balance -= cost; userData.plan = n; userData.planId = id; userData.daily = d;
+            save(); initPlans(); showToast("تم تفعيل " + n);
         }
 
         function initPlans() {
@@ -180,51 +217,21 @@
             plans.forEach(pl => {
                 const isCurrent = userData.planId === pl.id;
                 const isLocked = userData.planId > pl.id;
-                
-                let currentPlanPrice = 0;
-                if(userData.planId > 0) {
-                    const currentPlanObj = plans.find(pObj => pObj.id === userData.planId);
-                    if(currentPlanObj) currentPlanPrice = currentPlanObj.p;
-                }
-                const displayPrice = pl.p - currentPlanPrice;
-
-                // إنشاء الباقة باستخدام الأيقونات المتاحة
-                list.innerHTML += `
-                <div class="card p-4 border border-zinc-800 flex flex-col items-center text-center ${isLocked ? 'opacity-50' : ''}">
-                    <div class="plan-icon-box">
-                        <i class="${pl.icon} ${pl.color} text-4xl"></i>
-                    </div>
-                    
-                    <h4 class="text-blue-500 font-black">${pl.n}</h4>
-                    <p class="text-[10px] text-zinc-500 mt-1">
-                        ${isLocked || isCurrent ? `السعر الأصلي: $${pl.p}` : `تكلفة الترقية: $${displayPrice.toFixed(2)}`} 
-                        <br> ربح يومي $${pl.d}
-                    </p>
-                    <button onclick="buyPlan(${pl.id}, '${pl.n}', ${pl.p}, ${pl.d})" 
-                        class="${isCurrent ? 'bg-green-600' : (isLocked ? 'bg-zinc-700' : 'bg-blue-600')} text-white mt-4 py-2 w-32 rounded-full font-bold text-[9px]"
-                        ${isLocked || isCurrent ? 'disabled' : ''}>
-                        ${isCurrent ? 'خيارك الحالي' : (isLocked ? 'خطة سابقة' : 'ترقية الآن')}
-                    </button>
-                </div>`;
+                let currP = 0;
+                if(userData.planId > 0) { const c = plans.find(p => p.id === userData.planId); if(c) currP = c.p; }
+                const diff = pl.p - currP;
+                list.innerHTML += `<div class="card p-4 border border-zinc-800 flex flex-col items-center text-center ${isLocked ? 'opacity-50' : ''}"><div class="plan-icon-box"><i class="${pl.icon} ${pl.color} text-4xl"></i></div><h4 class="text-blue-500 font-black">${pl.n}</h4><p class="text-[10px] text-zinc-500 mt-1">السعر: $${pl.p} | ربح: $${pl.d}</p><button onclick="buyPlan(${pl.id}, '${pl.n}', ${pl.p}, ${pl.d})" class="${isCurrent ? 'bg-green-600' : (isLocked ? 'bg-zinc-700' : 'bg-blue-600')} text-white mt-4 py-2 w-32 rounded-full font-bold text-[9px]" ${isLocked || isCurrent ? 'disabled' : ''}>${isCurrent ? 'نشط الآن' : (isLocked ? 'خطة سابقة' : 'ترقية: $' + diff.toFixed(0))}</button></div>`;
             });
         }
 
-        // --- باقي الوظائف الأصلية دون تغيير ---
-        async function submitDeposit() {
-            const amt = document.getElementById('depAmount').value;
-            if(!amt || amt <= 0) return showToast("أدخل مبلغاً صحيحاً");
-            await sendAdminNotification(`🔔 إيداع جديد: ${userData.email}\n💰 المبلغ: $${amt}\n🆔 UID: ${userData.id}`);
-            showToast("تم إرسال الطلب ✅");
-            document.getElementById('depAmount').value = "";
+        function doMining() {
+            if(userData.planId === 0) return showToast("يرجى تفعيل خطة أولاً");
+            const today = new Date().toDateString();
+            if(userData.lastMine === today) return showToast("تم التعدين اليوم بالفعل!");
+            userData.balance += userData.daily; userData.lastMine = today;
+            save(); showToast("تمت إضافة $" + userData.daily.toFixed(2) + " لرصيدك ✅");
         }
-        async function submitWithdraw() {
-            const addr = document.getElementById('witAddress').value;
-            const amt = parseFloat(document.getElementById('witAmount').value);
-            if(!addr || !amt || amt < 5) return showToast("تأكد من البيانات");
-            if(amt > userData.balance) return showToast("رصيدك غير كافٍ");
-            await sendAdminNotification(`⚠️ سحب جديد: ${userData.email}\n💰 المبلغ: $${amt}\n🏦 العنوان: ${addr}`);
-            userData.balance -= amt; save(); showToast("طلب السحب قيد المعالجة ✅");
-        }
+
         function save() { localStorage.setItem('saizone_user', JSON.stringify(userData)); updateUI(); }
         function updateUI() {
             if(!userData) return;
@@ -232,35 +239,23 @@
             document.getElementById('userNameDisplay').innerText = userData.name;
             document.getElementById('userIdDisplay').innerText = "UID: " + userData.id;
             document.getElementById('currentPlan').innerText = userData.plan;
-            document.getElementById('refLinkDisplay').innerText = window.location.origin + "/?ref=" + dynamicRefCode;
+            document.getElementById('refLinkText').innerText = fullRefLink;
         }
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
             const i = document.getElementById('themeIcon');
             i.className = document.body.classList.contains('light-mode') ? "fa-solid fa-sun text-yellow-500" : "fa-solid fa-moon text-blue-500";
         }
-        function copyRefLink() { navigator.clipboard.writeText(document.getElementById('refLinkDisplay').innerText); showToast("تم نسخ الرابط ✅"); }
-        function logout() { localStorage.clear(); location.reload(); }
         function tabNav(el, p) {
             document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             document.getElementById(p).classList.add('active'); el.classList.add('active');
         }
-        function doMining() {
-            if(userData.planId === 0) return showToast("اشترك في خطة أولاً");
-            const today = new Date().toDateString();
-            if(userData.lastMine === today) return showToast("تم التعدين اليوم");
-            userData.balance += userData.daily; userData.lastMine = today; save(); showToast("تم التعدين بنجاح! ✅");
-        }
-        function openAdminPanel() {
-            const targetId = prompt("أدخل UID المستخدم:");
-            if (targetId == userData.id) {
-                const amount = parseFloat(prompt("المبلغ ($):"));
-                if (amount > 0) { userData.balance += amount; save(); showToast(`تم شحن $${amount} ✅`); initPlans(); }
-            }
-        }
-        function showToast(m) { const t = document.getElementById('toast'); t.innerText = m; t.style.display = 'block'; setTimeout(()=>t.style.display='none', 3000); }
-        initPlans(); window.onload = () => { if(userData) handleLogin(); };
+        function copyFullRefLink() { navigator.clipboard.writeText(fullRefLink); showToast("تم نسخ الرابط ✅"); }
+        function logout() { localStorage.clear(); location.reload(); }
+        function showToast(m) { const t = document.getElementById('toast'); t.innerText = m; t.style.display = 'block'; setTimeout(()=>t.style.display='none', 3500); }
+        
+        window.onload = () => { if(userData) { handleLogin(); } };
     </script>
 </body>
 </html>
