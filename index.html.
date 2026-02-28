@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SAIZONE | PREMIUM</title>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore-compat.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root { --bg: #050505; --card: #111111; --accent: #3b82f6; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Cairo', sans-serif; }
+        body, html { margin: 0; padding: 0; height: 100%; background: var(--bg); color: white; overflow-x: hidden; }
+        
+        /* واجهة الدخول الفخمة */
+        #authPage {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
+            display: flex; align-items: center; justify-content: center; z-index: 10000;
+        }
+        .login-card {
+            background: rgba(15, 15, 15, 0.98); border: 1px solid #222;
+            width: 90%; max-width: 380px; padding: 40px 25px; border-radius: 30px; text-align: center;
+        }
+        .input-group { position: relative; margin-bottom: 15px; }
+        .input-group input {
+            width: 100%; background: #000; border: 1px solid #333;
+            border-radius: 15px; padding: 12px 45px 12px 15px; color: #fff; outline: none;
+        }
+        .input-group i { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #555; }
+        
+        /* لوحة المدير المخفية */
+        #adminSection { display: none; margin-top: 20px; }
+
+        /* تنسيق الصفحات */
+        .page { display: none; padding: 20px; padding-bottom: 100px; }
+        .page.active { display: block; animation: fadeIn 0.4s; }
+        .card { background: var(--card); border-radius: 20px; padding: 20px; margin-bottom: 15px; border: 1px solid #1f1f1f; }
+        
+        /* صور الباقات Ultra HD */
+        .plan-img { width: 100%; height: 180px; object-fit: cover; border-radius: 15px; margin-bottom: 15px; border: 1px solid #333; }
+        
+        nav { position: fixed; bottom: 0; width: 100%; background: #000; display: none; justify-content: space-around; padding: 15px 0; border-top: 1px solid #1f1f1f; z-index: 5000; }
+        .nav-item { color: #555; font-size: 11px; text-align: center; flex: 1; }
+        .nav-item.active { color: var(--accent); }
+        #toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #fff; color: #000; padding: 8px 20px; border-radius: 50px; z-index: 100000; display: none; font-weight: bold; font-size: 12px; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <div id="toast"></div>
+
+    <div id="authPage">
+        <div class="login-card">
+            <h2 class="text-3xl font-black mb-8 italic">SAIZONE</h2>
+            <div class="input-group">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" id="email" placeholder="البريد الإلكتروني">
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="password" placeholder="كلمة المرور">
+            </div>
+            <button onclick="handleAuth('login')" class="w-full bg-white text-black py-3 rounded-xl font-black mt-4">دخول</button>
+            <p class="text-[11px] mt-6 text-gray-500">ليس لديك حساب؟ <span class="text-white font-bold cursor-pointer" onclick="handleAuth('register')">سجل الآن</span></p>
+        </div>
+    </div>
+
+    <div id="profilePage" class="page">
+        <div class="card text-center">
+            <p class="text-[10px] text-blue-500 font-bold uppercase">Balance</p>
+            <h2 class="font-black text-4xl mt-1">$<span id="pBalance">0.00</span></h2>
+            <p id="userIdDisplay" class="text-[9px] text-gray-600 mt-2">UID: ---</p>
+        </div>
+
+        <div id="adminSection" class="card border-blue-900 bg-blue-900/10" onclick="adminAction()">
+            <p class="text-center text-blue-400 font-bold"><i class="fa-solid fa-user-shield"></i> لوحة الإدارة (خاصة بك)</p>
+        </div>
+
+        <div class="card">
+            <a href="https://t.me/SAIZONE_SUPPORT" class="block text-center bg-zinc-900 p-4 rounded-xl text-sm font-bold">
+                <i class="fa-brands fa-telegram mr-2"></i> الدعم الفني
+            </a>
+        </div>
+        <button onclick="logout()" class="w-full mt-10 text-gray-700 text-[10px] font-bold">LOGOUT</button>
+    </div>
+
+    <div id="plansPage" class="page">
+        <h3 class="text-center text-[12px] font-black mb-6 uppercase">VIP INVESTMENT</h3>
+        <div id="plansList"></div>
+    </div>
+
+    <div id="depositPage" class="page">
+        <div class="card">
+            <h3 class="text-center font-black mb-4">RECHARGE</h3>
+            <p class="text-[10px] bg-black p-4 rounded-xl text-blue-400 break-all text-center mb-4">TTmVnVwGtMm11BkxJA7LYitCgfTqoSN8dw</p>
+            <input type="number" id="depAmount" placeholder="المبلغ" class="w-full bg-black p-4 rounded-xl mb-4 border border-zinc-800 text-center">
+            <button onclick="showToast('جاري مراجعة طلبك')" class="w-full bg-blue-600 p-4 rounded-xl font-bold">تأكيد الإيداع</button>
+        </div>
+    </div>
+
+    <nav id="bottomNav">
+        <div class="nav-item active" onclick="tabNav(this, 'profilePage')"><i class="fa-solid fa-user-circle text-xl"></i><br>Hose</div>
+        <div class="nav-item" onclick="tabNav(this, 'plansPage')"><i class="fa-solid fa-gem text-xl"></i><br>Plans</div>
+        <div class="nav-item" onclick="tabNav(this, 'depositPage')"><i class="fa-solid fa-wallet text-xl"></i><br>Deposit</div>
+    </nav>
+
+    <script>
+        const firebaseConfig = { apiKey: "AIzaSyA8gQY00YStIFeNnAM1fKbat_wDhDAOGNA", authDomain: "saizon-648f8.firebaseapp.com", projectId: "saizon-648f8", storageBucket: "saizon-648f8.firebasestorage.app", messagingSenderId: "368143731633", appId: "1:368143731633:web:d318a4b209fc7cc16f8b90" };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth(), db = firebase.firestore();
+
+        const MASTER_ADMIN = "abwk18468@gmail.com";
+
+        auth.onAuthStateChanged(user => {
+            if(user) {
+                document.getElementById('authPage').style.display = 'none';
+                document.getElementById('bottomNav').style.display = 'flex';
+                document.getElementById('userIdDisplay').innerText = `UID: ${user.uid}`;
+                
+                if(user.email.toLowerCase() === MASTER_ADMIN.toLowerCase()) {
+                    document.getElementById('adminSection').style.display = 'block';
+                }
+
+                db.collection("users").doc(user.uid).onSnapshot(doc => {
+                    if(doc.exists) document.getElementById('pBalance').innerText = (doc.data().balance || 0).toFixed(2);
+                });
+                showPage('profilePage');
+            } else {
+                document.getElementById('authPage').style.display = 'flex';
+                document.getElementById('bottomNav').style.display = 'none';
+            }
+        });
+
+        async function handleAuth(type) {
+            const e = document.getElementById('email').value, p = document.getElementById('password').value;
+            if(!e || !p) return showToast("أكمل البيانات");
+            try {
+                if(type === 'register') {
+                    const r = await auth.createUserWithEmailAndPassword(e, p);
+                    await db.collection("users").doc(r.user.uid).set({ email: e, balance: 0 });
+                } else await auth.signInWithEmailAndPassword(e, p);
+            } catch(err) { showToast("فشل في الدخول"); }
+        }
+
+        async function adminAction() {
+            const uid = prompt("UID المستخدم:");
+            const amount = parseFloat(prompt("المبلغ المراد إضافته:"));
+            if(uid && !isNaN(amount)) {
+                await db.collection("users").doc(uid).update({ balance: firebase.firestore.FieldValue.increment(amount) });
+                showToast("تم الشحن بنجاح ✅");
+            }
+        }
+
+        const plans = [
+            { n: "STARTER", p: 10, i: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=1000" },
+            { n: "GOLD PRO", p: 200, i: "https://images.unsplash.com/photo-1642104704074-907c0698bcd9?q=80&w=1000" },
+            { n: "VIP ELITE", p: 5000, i: "https://images.unsplash.com/photo-1518544801976-3e159e50e5bb?q=80&w=1000" }
+        ];
+
+        plans.forEach(pl => {
+            document.getElementById('plansList').innerHTML += `
+                <div class="card p-4">
+                    <img src="${pl.i}" class="plan-img">
+                    <div class="flex justify-between items-center">
+                        <span class="font-black text-sm">${pl.n}</span>
+                        <button class="bg-blue-600 px-6 py-2 rounded-xl text-xs font-bold">$${pl.p}</button>
+                    </div>
+                </div>`;
+        });
+
+        function logout() { auth.signOut(); }
+        function tabNav(el, p) { document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active')); el.classList.add('active'); showPage(p); }
+        function showPage(p) { document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active')); document.getElementById(p).classList.add('active'); }
+        function showToast(m) { const t = document.getElementById('toast'); t.innerText = m; t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 3000); }
+    </script>
+</body>
+</html>
