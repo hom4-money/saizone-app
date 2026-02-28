@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SAIZONE | UNIVERSAL COMPATIBILITY</title>
+    <title>SAIZONE | FULL RESTORED EDITION</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
@@ -12,19 +12,13 @@
 
     <style>
         :root { --bg: #050505; --card: #111111; --accent: #3b82f6; --glow-color: rgba(59, 130, 246, 0.6); }
-        * { 
-            box-sizing: border-box; 
-            -webkit-tap-highlight-color: transparent; 
-            font-family: 'Cairo', sans-serif; 
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Cairo', sans-serif; -webkit-font-smoothing: antialiased; }
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; background: var(--bg); color: white; overflow: hidden; }
         
         #authPage {
             position: fixed; inset: 0;
             background: url('https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=2000') no-repeat center center fixed;
-            background-size: cover; display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center; z-index: 10000;
+            background-size: cover; display: flex; align-items: center; justify-content: center; z-index: 10000;
         }
         .login-card {
             background: rgba(0, 0, 0, 0.85); -webkit-backdrop-filter: blur(25px); backdrop-filter: blur(25px);
@@ -36,73 +30,45 @@
             width: 100%; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 30px; padding: 12px 15px 12px 45px; color: #fff; outline: none; text-align: right; font-size: 14px;
         }
-        .input-group i { position: absolute; right: 20px; top: 50%; -webkit-transform: translateY(-50%); transform: translateY(-50%); color: rgba(255,255,255,0.4); }
+        .input-group i { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.4); }
         
-        .page { display: none; height: 100dvh; padding: 20px; overflow-y: auto; padding-bottom: 120px; -webkit-overflow-scrolling: touch; }
-        .page.active { display: block; -webkit-animation: fadeIn 0.3s; animation: fadeIn 0.3s; }
+        .page { display: none; height: 100dvh; padding: 20px; overflow-y: auto; padding-bottom: 120px; }
+        .page.active { display: block; animation: fadeIn 0.3s; }
         .card { background: var(--card); border-radius: 24px; padding: 20px; margin-bottom: 20px; border: 1px solid #1f1f1f; }
         
-        nav { position: fixed; bottom: 0; width: 100%; background: rgba(10, 10, 10, 0.98); -webkit-backdrop-filter: blur(15px); backdrop-filter: blur(15px); display: none; -webkit-justify-content: space-around; justify-content: space-around; padding: 15px 0; border-top: 1px solid #1f1f1f; z-index: 5000; }
+        nav { position: fixed; bottom: 0; width: 100%; background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(15px); display: none; justify-content: space-around; padding: 15px 0; border-top: 1px solid #1f1f1f; z-index: 5000; }
         .nav-item { color: #4b5563; font-size: 10px; text-align: center; flex: 1; cursor: pointer; }
         .nav-item.active { color: var(--accent); font-weight: 900; }
         
-        #toast { position: fixed; top: 30px; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); background: #fff; color: #000; padding: 8px 20px; border-radius: 50px; z-index: 100000; display: none; font-weight: 900; font-size: 10px; }
+        #toast { position: fixed; top: 30px; left: 50%; transform: translateX(-50%); background: #fff; color: #000; padding: 8px 20px; border-radius: 50px; z-index: 100000; display: none; font-weight: 900; font-size: 10px; }
         
         .plan-img { width: 80px; height: 80px; object-fit: cover; border-radius: 18px; margin: 0 auto; border: 2px solid #1f1f1f; }
 
         .glow-box {
-            background: rgba(59, 130, 246, 0.05);
-            border: 1px solid var(--accent);
-            border-radius: 18px; padding: 14px;
-            display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: space-between; justify-content: space-between;
-            margin-top: 15px; -webkit-animation: pulseGlow 2s infinite; animation: pulseGlow 2s infinite;
-        }
-
-        @-webkit-keyframes pulseGlow {
-            0% { -webkit-box-shadow: 0 0 5px rgba(59, 130, 246, 0.2); box-shadow: 0 0 5px rgba(59, 130, 246, 0.2); }
-            50% { -webkit-box-shadow: 0 0 20px rgba(59, 130, 246, 0.6); box-shadow: 0 0 20px rgba(59, 130, 246, 0.6); }
-            100% { -webkit-box-shadow: 0 0 5px rgba(59, 130, 246, 0.2); box-shadow: 0 0 5px rgba(59, 130, 246, 0.2); }
+            background: rgba(59, 130, 246, 0.05); border: 1px solid var(--accent);
+            border-radius: 18px; padding: 14px; display: flex; align-items: center; justify-content: space-between;
+            margin-top: 15px; animation: pulseGlow 2s infinite;
         }
 
         @keyframes pulseGlow {
-            0% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.2); }
+            0%, 100% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.2); }
             50% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.6); }
-            100% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.2); }
         }
 
-        #adminContainer { display: none; }
-        #aiBtn { position: fixed; bottom: 100px; left: 20px; width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: none; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center; z-index: 6000; box-shadow: 0 0 20px var(--glow-color); }
-        #aiWindow { position: fixed; bottom: 160px; left: 20px; width: 280px; height: 380px; background: #0f0f0f; border: 1px solid #222; border-radius: 20px; display: none; -webkit-flex-direction: column; flex-direction: column; z-index: 7000; overflow: hidden; }
-        
-        @-webkit-keyframes fadeIn { from { opacity: 0; -webkit-transform: translateY(10px); transform: translateY(10px); } to { opacity: 1; -webkit-transform: translateY(0); transform: translateY(0); } }
+        #aiBtn { position: fixed; bottom: 100px; left: 20px; width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: none; align-items: center; justify-content: center; z-index: 6000; box-shadow: 0 0 20px var(--glow-color); }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
     <div id="toast"></div>
-
-    <div id="aiBtn" onclick="toggleAI()"><i class="fa-solid fa-robot text-white"></i></div>
-    <div id="aiWindow">
-        <div class="bg-blue-600 p-3 text-xs font-black flex justify-between"><span>SAIZONE AI</span><button onclick="toggleAI()">✕</button></div>
-        <div id="aiMsgs" class="flex-1 p-3 overflow-y-auto text-[11px] flex flex-col gap-2"></div>
-        <div class="p-2 bg-black flex border-t border-zinc-800">
-            <input type="text" id="aiField" class="flex-1 bg-zinc-900 p-2 rounded-full text-[10px] outline-none text-white text-right">
-            <button onclick="sendAI()" class="text-blue-500 px-2"><i class="fa-solid fa-paper-plane"></i></button>
-        </div>
-    </div>
+    <div id="aiBtn"><i class="fa-solid fa-robot text-white"></i></div>
 
     <div id="authPage">
         <div class="login-card">
             <h2 class="text-3xl font-black mb-8 italic text-white uppercase tracking-tighter">SAIZONE</h2>
-            <div class="input-group">
-                <i class="fa-solid fa-envelope"></i>
-                <input type="email" id="email" placeholder="البريد الإلكتروني">
-            </div>
-            <div class="input-group">
-                <i class="fa-solid fa-lock"></i>
-                <input type="password" id="password" placeholder="كلمة المرور">
-            </div>
+            <div class="input-group"><i class="fa-solid fa-envelope"></i><input type="email" id="email" placeholder="البريد الإلكتروني"></div>
+            <div class="input-group"><i class="fa-solid fa-lock"></i><input type="password" id="password" placeholder="كلمة المرور"></div>
             <button onclick="handleLogin()" class="w-full bg-white text-black py-3 rounded-full font-black mt-4">Login / Register</button>
         </div>
     </div>
@@ -113,7 +79,7 @@
             <div class="card text-center border-b-4 border-blue-600">
                 <p class="text-[10px] text-blue-500 font-bold uppercase tracking-widest">Main Wallet</p>
                 <h2 id="userNameDisplay" class="font-black text-2xl uppercase mt-1">---</h2>
-                <p id="userIdDisplay" class="text-[9px] text-gray-600 font-mono">UID: ---</p>
+                <p id="userIdDisplay" class="text-[9px] text-gray-600 font-mono italic">UID: ---</p>
             </div>
             
             <div class="card">
@@ -133,10 +99,10 @@
                     <button onclick="copyLink()" class="bg-blue-600 text-white text-[9px] px-4 py-2 rounded-xl font-black">COPY</button>
                 </div>
 
-                <div id="adminContainer">
+                <div id="adminContainer" style="display:none;">
                     <div class="glow-box border-dashed">
                         <div class="flex flex-col">
-                            <span class="text-[8px] text-blue-400 uppercase font-bold mb-1">Admin Access</span>
+                            <span class="text-[8px] text-blue-400 font-bold mb-1">Admin Access</span>
                             <span class="text-[10px] text-white font-black">Control Panel Console</span>
                         </div>
                         <button onclick="openAdminPanel()" class="bg-white text-blue-600 text-[9px] px-4 py-2 rounded-xl font-black">MANAGE</button>
@@ -158,7 +124,6 @@
                 <i class="fa-solid fa-microchip text-4xl text-blue-500 mb-4"></i>
                 <h3 class="font-black">Cloud Mining</h3>
                 <button onclick="doMining()" id="mineBtn" class="bg-blue-600 text-white w-44 mx-auto block py-3 rounded-full text-[10px] mt-8 font-black shadow-lg">Start Mining</button>
-                <div class="flex justify-center mt-6"><div id="step-0" class="step-dot"></div></div>
             </div>
         </div>
 
@@ -177,7 +142,7 @@
                 <h3 class="font-black text-gray-400 mb-4 uppercase">Withdraw / سحب</h3>
                 <input type="text" id="witAddr" placeholder="USDT TRC20 Address" class="w-full bg-zinc-900 p-4 rounded-xl text-center mb-3 outline-none border border-zinc-800 text-xs text-white">
                 <input type="number" id="witAmt" placeholder="Amount ($)" class="w-full bg-zinc-900 p-4 rounded-xl text-center mb-3 outline-none border border-zinc-800 text-xs text-white">
-                <button onclick="handleWithdraw()" class="w-full bg-blue-600 py-4 rounded-xl font-bold mt-4">Request Payout</button>
+                <button onclick="showToast('Withdrawal Pending ✅')" class="w-full bg-blue-600 py-4 rounded-xl font-bold mt-4">Request Payout</button>
             </div>
         </div>
 
@@ -192,26 +157,15 @@
 
     <script>
         const MASTER_ADMIN = "abwk18468@gmail.com";
-        let userData = null;
-
-        try {
-            const saved = localStorage.getItem('saizone_user');
-            if(saved) userData = JSON.parse(saved);
-        } catch(e) { console.error("Storage Error", e); }
-
-        function save() { 
-            try {
-                localStorage.setItem('saizone_user', JSON.stringify(userData)); 
-                updateUI(); 
-            } catch(e) { console.error("Save Error", e); }
-        }
+        let userData = JSON.parse(localStorage.getItem('saizone_user'));
 
         function handleLogin() {
             const e = document.getElementById('email').value.trim().toLowerCase();
             const p = document.getElementById('password').value;
             if(!e || !p) return showToast("Fill all fields");
-            if(!userData) {
-                userData = { email: e, name: e.split('@')[0], balance: 0, daily: 0, plan: "No Plan", lastMine: "", id: Math.floor(100000 + Math.random() * 900000) };
+            if(!userData || userData.id === "undefined") {
+                const newId = Math.floor(20260000 + Math.random() * 99999);
+                userData = { email: e, name: e.split('@')[0], balance: 0, daily: 0, plan: "No Plan", lastMine: "", id: newId };
             }
             document.getElementById('authPage').style.display = 'none';
             document.getElementById('mainApp').style.display = 'block';
@@ -221,21 +175,17 @@
             save();
         }
 
+        function save() { 
+            localStorage.setItem('saizone_user', JSON.stringify(userData)); 
+            updateUI(); 
+        }
+
         function updateUI() {
             if(!userData) return;
             document.getElementById('pBalance').innerText = userData.balance.toFixed(2);
             document.getElementById('userNameDisplay').innerText = userData.name;
             document.getElementById('userIdDisplay').innerText = "UID: " + userData.id;
-            document.getElementById('currentPlan').innerText = userData.plan;
             document.getElementById('refLink').innerText = window.location.origin + window.location.pathname + "?ref=" + userData.id;
-        }
-
-        function openAdminPanel() {
-            const uid = prompt("Enter User UID:");
-            if(uid == userData.id) {
-                const amt = parseFloat(prompt("Amount to add ($):"));
-                if(!isNaN(amt)) { userData.balance += amt; save(); showToast("Done! ✅"); }
-            } else { alert("UID error."); }
         }
 
         const plans = [
@@ -246,20 +196,15 @@
             { n: "VIP Diamond", p: 1000, d: 45.00, i: "https://images.unsplash.com/photo-1614332287897-cdc485fa562d?q=80&w=400" }
         ];
 
-        const plList = document.getElementById('plansList');
-        if(plList) {
-            plans.forEach(pl => {
-                plList.innerHTML += `
-                <div class="card p-4 border border-zinc-800 flex flex-col items-center">
-                    <img src="${pl.i}" class="plan-img mb-4">
-                    <div class="text-center">
-                        <h4 class="text-blue-500 font-black">${pl.n}</h4>
-                        <p class="text-[9px] text-zinc-500 mt-1">$${pl.p} | $${pl.d} Daily</p>
-                        <button onclick="buyPlan('${pl.n}', ${pl.p}, ${pl.d})" class="bg-blue-600 text-white mt-4 py-2 w-32 rounded-full font-bold text-[9px]">Activate</button>
-                    </div>
-                </div>`;
-            });
-        }
+        plans.forEach(pl => {
+            document.getElementById('plansList').innerHTML += `
+            <div class="card p-4 border border-zinc-800 flex flex-col items-center">
+                <img src="${pl.i}" class="plan-img mb-4">
+                <h4 class="text-blue-500 font-black">${pl.n}</h4>
+                <p class="text-[9px] text-zinc-500 mt-1">$${pl.p} | $${pl.d} Daily</p>
+                <button onclick="buyPlan('${pl.n}', ${pl.p}, ${pl.d})" class="bg-blue-600 text-white mt-4 py-2 w-32 rounded-full font-bold text-[9px]">Activate</button>
+            </div>`;
+        });
 
         function buyPlan(n, p, d) {
             if(userData.balance < p) return showToast("Low Balance");
@@ -273,37 +218,20 @@
             userData.balance += userData.daily; userData.lastMine = today; save(); showToast("Success! ✅");
         }
 
-        function logout() { 
-            localStorage.clear(); 
-            window.location.replace(window.location.origin + window.location.pathname);
-        }
-
+        function logout() { localStorage.clear(); window.location.replace(window.location.origin + window.location.pathname); }
         function tabNav(el, p) {
             document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            const target = document.getElementById(p);
-            if(target) target.classList.add('active'); 
-            if(el) el.classList.add('active');
+            document.getElementById(p).classList.add('active'); el.classList.add('active');
         }
-
         function showToast(m) { const t = document.getElementById('toast'); t.innerText = m; t.style.display = 'block'; setTimeout(()=>t.style.display='none', 3000); }
         function copyLink() { 
             const link = document.getElementById('refLink').innerText;
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(link).then(()=>showToast("Copied! ✅"));
-            } else {
-                const textArea = document.createElement("textarea");
-                textArea.value = link;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                showToast("Copied! ✅");
-            }
+            const temp = document.createElement("textarea"); document.body.appendChild(temp);
+            temp.value = link; temp.select(); document.execCommand('copy'); document.body.removeChild(temp);
+            showToast("Copied! ✅");
         }
-        function toggleAI() { const w = document.getElementById('aiWindow'); w.style.display = w.style.display === 'flex' ? 'none' : 'flex'; }
-        
-        window.onload = () => { if(userData) handleLogin(); };
+        window.onload = () => { if(userData && userData.id !== "undefined") handleLogin(); };
     </script>
 </body>
 </html>
