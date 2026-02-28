@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>SAIZONE | FINAL STABLE</title>
+    <title>SAIZONE | GLOBAL STABLE</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
@@ -29,7 +29,6 @@
         .theme-toggle { position: absolute; top: 20px; left: 20px; width: 40px; height: 40px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 6000; }
         #botBtn { position: fixed; bottom: 100px; right: 20px; width: 55px; height: 55px; background: #0088cc; border-radius: 50%; display: none; align-items: center; justify-content: center; z-index: 6000; box-shadow: 0 4px 20px rgba(0, 136, 204, 0.6); border: 2px solid white; }
         .input-style { width: 100%; background: rgba(120, 120, 120, 0.1); border: 1px solid var(--border); border-radius: 15px; padding: 12px; color: var(--text); outline: none; margin-bottom: 15px; text-align: center; font-size: 13px; }
-        .plan-icon-box { width: 75px; height: 75px; border-radius: 18px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--border); background: var(--bg); }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         #frozenOverlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 20000; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 30px; }
     </style>
@@ -39,7 +38,7 @@
     <div id="frozenOverlay">
         <i class="fa-solid fa-snowflake text-6xl text-blue-400 mb-6"></i>
         <h2 class="text-2xl font-black text-white mb-2">الحساب مجمد</h2>
-        <p class="text-gray-400 text-sm">تم تعليق حسابك. يرجى مراجعة الإدارة.</p>
+        <p class="text-gray-400 text-sm">تم تعليق حسابك من قبل الإدارة.</p>
         <button onclick="logout()" class="mt-8 bg-white text-black px-10 py-3 rounded-full font-bold">خروج</button>
     </div>
 
@@ -68,7 +67,7 @@
                 <div style="display: flex; align-items: center; gap: 12px; width: 85%;">
                     <div style="background: rgba(255,255,255,0.2); width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-share-nodes text-white text-lg"></i></div>
                     <div style="overflow: hidden;">
-                        <p style="color: rgba(255,255,255,0.8); font-size: 10px; font-weight: bold; margin: 0;">كود الإحالة الثابت</p>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 10px; font-weight: bold; margin: 0;">كود الإحالة (يعمل على جيت هاب)</p>
                         <h4 id="refLinkText" style="color: white; font-weight: 900; font-size: 11px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; direction: ltr;">---</h4>
                     </div>
                 </div>
@@ -94,9 +93,9 @@
         </div>
 
         <div id="plansPage" class="page"><h3 class="text-center text-[12px] text-gray-500 mb-6 font-black uppercase tracking-widest">Plans</h3><div id="plansList" class="grid grid-cols-1 gap-4"></div></div>
-        <div id="miningPage" class="page"><h3 class="text-center text-[12px] text-gray-500 mb-6 font-black uppercase tracking-widest">Mining</h3><div class="card text-center py-10"><i class="fa-solid fa-bolt text-3xl text-blue-500 animate-pulse mb-4"></i><br><button onclick="doMining()" class="bg-blue-600 text-white px-10 py-3 rounded-full text-[12px] font-black">ابدأ التعدين</button></div></div>
-        <div id="depositPage" class="page"><h3 class="text-center text-[12px] text-gray-500 mb-6 font-black uppercase tracking-widest">Deposit</h3><div class="card text-center font-mono text-[10px] text-blue-400 mb-4">TTmVnVwGtMm11BkxJA7LYitCgfTqoSN8dw</div><input type="number" id="depAmount" placeholder="المبلغ" class="input-style"><button onclick="submitDeposit()" class="w-full bg-blue-600 py-4 rounded-xl text-white font-black">تأكيد</button></div>
-        <div id="withdrawPage" class="page"><h3 class="text-center text-[12px] text-gray-500 mb-6 font-black uppercase tracking-widest">Withdraw</h3><div class="card text-center"><p class="text-[10px] text-orange-500 mb-4">السحب كل 14 يوم</p><input type="text" id="witAddress" placeholder="العنوان" class="input-style"><input type="number" id="witAmount" placeholder="المبلغ" class="input-style"><button onclick="submitWithdraw()" class="w-full bg-blue-600 py-4 rounded-xl text-white font-black">طلب سحب</button></div></div>
+        <div id="miningPage" class="page"><h3 class="text-center text-[12px] text-gray-500 mb-6 font-black uppercase tracking-widest">Mining</h3><div class="card text-center py-10"><i class="fa-solid fa-bolt text-3xl text-blue-500 mb-4 animate-pulse"></i><br><button onclick="doMining()" class="bg-blue-600 text-white px-10 py-3 rounded-full font-black text-[12px]">ابدأ التعدين اليومي</button></div></div>
+        <div id="depositPage" class="page"><h3 class="text-center text-[12px] text-gray-500 mb-6 font-black uppercase tracking-widest">Deposit</h3><div class="card text-center text-blue-400 text-[10px] font-mono break-all mb-4">TTmVnVwGtMm11BkxJA7LYitCgfTqoSN8dw</div><input type="number" id="depAmount" placeholder="المبلغ" class="input-style"><button onclick="submitDeposit()" class="w-full bg-blue-600 py-4 rounded-xl text-white font-black">تأكيد الإيداع</button></div>
+        <div id="withdrawPage" class="page"><h3 class="text-center text-[12px] text-gray-500 mb-6 font-black uppercase tracking-widest">Withdraw</h3><div class="card text-center"><p class="text-[10px] text-orange-500 mb-4">السحب متاح كل 14 يوماً</p><input type="text" id="witAddress" placeholder="عنوان USDT TRC20" class="input-style"><input type="number" id="witAmount" placeholder="المبلغ" class="input-style"><button onclick="submitWithdraw()" class="w-full bg-blue-600 py-4 rounded-xl text-white font-black">طلب سحب</button></div></div>
 
         <nav id="bottomNav">
             <div class="nav-item active" onclick="tabNav(this, 'profilePage')"><i class="fa-solid fa-user mb-1"></i><br>Profile</div>
@@ -130,64 +129,58 @@
             const e = document.getElementById('email').value.trim().toLowerCase();
             const p = document.getElementById('password').value;
             
-            // التحقق من الحقول فقط عند تسجيل دخول جديد تماماً
-            if(!userData && (!e || !p)) return showToast("يرجى ملء الحقول");
-            if(userData && userData.email !== e && e !== "") { 
-                // إذا حاول تسجيل دخول ببريد مختلف
-                if(!e || !p) return showToast("يرجى ملء الحقول");
-            }
-
+            if(!userData && (!e || !p)) return showToast("يرجى إدخال البيانات");
+            
             if(!userData || (e !== "" && userData.email !== e)) {
                 userData = { email: e, name: e.split('@')[0], balance: 0, daily: 0, plan: "No Plan", planId: 0, lastMine: "", id: Math.floor(20260000 + Math.random() * 99999), lastWithdrawDate: "", isFrozen: false };
             }
             
             if(userData.isFrozen) { document.getElementById('frozenOverlay').style.display = 'flex'; return; }
-            showApp();
+            save(); showApp();
         }
 
         function showApp() {
-            save();
             document.getElementById('authPage').style.display = 'none';
             document.getElementById('mainApp').style.display = 'block';
             document.getElementById('bottomNav').style.display = 'flex';
             document.getElementById('botBtn').style.display = 'flex';
             document.getElementById('themeToggle').style.display = 'flex';
             if(userData.email === MASTER_ADMIN) document.getElementById('masterAdminPanel').style.display = 'block';
-            initPlans();
+            initPlans(); updateUI();
         }
 
         function masterAdminControl() {
-            const targetId = prompt("أدخل UID الحساب:");
-            if(!targetId || targetId != userData.id) return showToast("UID غير صحيح");
-            const action = prompt("1. شحن | 2. تصفير | 3. تجميد/إلغاء | 4. ترقية");
-            if(action == "1") { const a = parseFloat(prompt("المبلغ:")); if(!isNaN(a)) { userData.balance += a; save(); showToast("تم الشحن"); } }
-            else if(action == "2") { userData.balance = 0; userData.plan = "No Plan"; userData.planId = 0; save(); showToast("تم التصفير"); }
-            else if(action == "3") { userData.isFrozen = !userData.isFrozen; save(); showToast("تم التغيير"); if(userData.isFrozen) location.reload(); }
-            else if(action == "4") { const l = parseInt(prompt("المستوى 1-10:")); const t = plans.find(p => p.id === l); if(t) { userData.plan = t.n; userData.planId = t.id; userData.daily = t.d; save(); initPlans(); } }
+            const tid = prompt("أدخل UID:");
+            if(tid != userData.id) return showToast("UID غير صحيح");
+            const act = prompt("1. شحن | 2. تصفير | 3. تجميد | 4. ترقية");
+            if(act == "1") { const a = parseFloat(prompt("المبلغ:")); if(!isNaN(a)) { userData.balance += a; save(); } }
+            else if(act == "2") { userData.balance = 0; userData.plan = "No Plan"; userData.planId = 0; save(); }
+            else if(act == "3") { userData.isFrozen = !userData.isFrozen; save(); if(userData.isFrozen) location.reload(); }
+            else if(act == "4") { const l = parseInt(prompt("المستوى 1-10:")); const t = plans.find(p => p.id === l); if(t) { userData.plan = t.n; userData.planId = t.id; userData.daily = t.d; save(); initPlans(); } }
         }
 
         async function submitWithdraw() {
             const addr = document.getElementById('witAddress').value;
             const amt = parseFloat(document.getElementById('witAmount').value);
-            if(!addr || isNaN(amt) || amt < 5) return showToast("الحد الأدنى 5$");
+            if(!addr || isNaN(amt) || amt < 5) return showToast("أقل سحب 5$");
             if(amt > userData.balance) return showToast("رصيد غير كافٍ");
-            const now = new Date().getTime();
+            
             if(userData.lastWithdrawDate) {
-                const diff = Math.floor((now - new Date(userData.lastWithdrawDate).getTime()) / (1000 * 60 * 60 * 24));
-                if(diff < 14) return showToast(`متبقي ${14 - diff} أيام`);
+                const diff = Math.floor((new Date().getTime() - new Date(userData.lastWithdrawDate).getTime()) / (1000 * 60 * 60 * 24));
+                if(diff < 14) return showToast(`متبقي ${14 - diff} أيام للسحب القادم`);
             }
-            const msg = `⚠️ طلب سحب\n👤 ${userData.email}\n💰 $${amt}\n🆔 ${userData.id}\n🏦 ${addr}`;
+            
+            const msg = `⚠️ سحب جديد\n👤 ${userData.email}\n💰 $${amt}\n🆔 ${userData.id}\n🏦 ${addr}`;
             await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage?chat_id=${TG_CHAT_ID}&text=${encodeURIComponent(msg)}`);
             userData.balance -= amt; userData.lastWithdrawDate = new Date().toISOString();
-            save(); showToast("تم إرسال الطلب");
+            save(); showToast("تم الإرسال");
         }
 
         function buyPlan(id, n, p, d) {
-            if(userData.planId >= id) return showToast("لا يمكن الترقية لخطة أدنى");
+            if(userData.planId >= id) return showToast("لا يمكن العودة للخلف");
             let cp = 0; if(userData.planId > 0) { const c = plans.find(pl => pl.id === userData.planId); if(c) cp = c.p; }
-            const cost = p - cp;
-            if(userData.balance < cost) return showToast("رصيد غير كافٍ");
-            userData.balance -= cost; userData.plan = n; userData.planId = id; userData.daily = d;
+            if(userData.balance < (p - cp)) return showToast("رصيد غير كافٍ");
+            userData.balance -= (p - cp); userData.plan = n; userData.planId = id; userData.daily = d;
             save(); initPlans();
         }
 
@@ -196,29 +189,34 @@
             plans.forEach(pl => {
                 const isC = userData.planId === pl.id; const isL = userData.planId > pl.id;
                 let cp = 0; if(userData.planId > 0) { const c = plans.find(p => p.id === userData.planId); if(c) cp = c.p; }
-                list.innerHTML += `<div class="card text-center ${isL ? 'opacity-50' : ''}"><i class="${pl.icon} ${pl.color} text-3xl"></i><h4 class="font-black">${pl.n}</h4><p class="text-[10px] text-gray-500">$${pl.p} | ربح $${pl.d}</p><button onclick="buyPlan(${pl.id},'${pl.n}',${pl.p},${pl.d})" class="bg-blue-600 text-white px-6 py-1 rounded-full text-[10px] mt-2" ${isL || isC ? 'disabled' : ''}>${isC ? 'نشط' : (isL ? 'سابق' : 'ترقية: $'+(pl.p-cp))}</button></div>`;
+                list.innerHTML += `<div class="card text-center ${isL ? 'opacity-50' : ''}"><h4 class="font-black text-blue-500">${pl.n}</h4><p class="text-[10px] text-gray-500">$${pl.p} | ربح $${pl.d}</p><button onclick="buyPlan(${pl.id},'${pl.n}',${pl.p},${pl.d})" class="bg-blue-600 text-white px-8 py-2 rounded-full text-[10px] mt-2" ${isL || isC ? 'disabled' : ''}>${isC ? 'نشط' : (isL ? 'سابق' : 'ترقية: $'+(pl.p-cp))}</button></div>`;
             });
         }
 
         function doMining() {
             if(userData.planId === 0) return showToast("فعل خطة أولاً");
-            const today = new Date().toDateString();
-            if(userData.lastMine === today) return showToast("تم التعدين اليوم");
-            userData.balance += userData.daily; userData.lastMine = today; save(); showToast("تم إضافة الربح");
+            if(userData.lastMine === new Date().toDateString()) return showToast("تم التعدين اليوم");
+            userData.balance += userData.daily; userData.lastMine = new Date().toDateString();
+            save(); showToast("تمت الإضافة");
         }
 
         function save() { localStorage.setItem('saizone_user', JSON.stringify(userData)); updateUI(); }
+        
         function updateUI() {
             if(!userData) return;
             document.getElementById('pBalance').innerText = userData.balance.toFixed(2);
             document.getElementById('userNameDisplay').innerText = userData.name;
             document.getElementById('userIdDisplay').innerText = "UID: " + userData.id;
             document.getElementById('currentPlan').innerText = userData.plan;
-            document.getElementById('refLinkText').innerText = window.location.origin + "/ref/" + userData.id;
+            
+            // إصلاح رابط الإحالة ليعمل على جيت هاب
+            const baseUrl = window.location.href.split('?')[0]; 
+            document.getElementById('refLinkText').innerText = baseUrl + "?ref=" + userData.id;
         }
+
+        function copyFullRefLink() { navigator.clipboard.writeText(document.getElementById('refLinkText').innerText); showToast("تم النسخ بنجاح ✅"); }
         function toggleTheme() { document.body.classList.toggle('light-mode'); }
         function tabNav(el, p) { document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active')); document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active')); document.getElementById(p).classList.add('active'); el.classList.add('active'); }
-        function copyFullRefLink() { navigator.clipboard.writeText(document.getElementById('refLinkText').innerText); showToast("تم النسخ"); }
         function logout() { localStorage.clear(); location.reload(); }
         function showToast(m) { const t = document.getElementById('toast'); t.innerText = m; t.style.display = 'block'; setTimeout(()=>t.style.display='none', 3000); }
         
