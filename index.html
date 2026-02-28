@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SAIZONE | ADMIN ID RECHARGE</title>
+    <title>SAIZONE | UNIFIED ID SYSTEM</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
@@ -12,7 +11,7 @@
 
     <style>
         :root { --bg: #050505; --card: #111111; --accent: #3b82f6; --glow-color: rgba(59, 130, 246, 0.6); }
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Cairo', sans-serif; -webkit-font-smoothing: antialiased; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Cairo', sans-serif; }
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; background: var(--bg); color: white; overflow: hidden; }
         
         #authPage {
@@ -21,7 +20,7 @@
             background-size: cover; display: flex; align-items: center; justify-content: center; z-index: 10000;
         }
         .login-card {
-            background: rgba(0, 0, 0, 0.85); -webkit-backdrop-filter: blur(25px); backdrop-filter: blur(25px);
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(25px);
             width: 88%; max-width: 380px; padding: 45px 25px; border-radius: 28px;
             border: 1px solid rgba(255, 255, 255, 0.1); text-align: center;
         }
@@ -42,8 +41,6 @@
         
         #toast { position: fixed; top: 30px; left: 50%; transform: translateX(-50%); background: #fff; color: #000; padding: 8px 20px; border-radius: 50px; z-index: 100000; display: none; font-weight: 900; font-size: 10px; }
         
-        .plan-img { width: 80px; height: 80px; object-fit: cover; border-radius: 18px; margin: 0 auto; border: 2px solid #1f1f1f; }
-
         .glow-box {
             background: rgba(59, 130, 246, 0.05); border: 1px solid var(--accent);
             border-radius: 18px; padding: 14px; display: flex; align-items: center; justify-content: space-between;
@@ -103,7 +100,7 @@
                     <div class="glow-box border-dashed border-red-500 bg-red-500/5">
                         <div class="flex flex-col">
                             <span class="text-[8px] text-red-400 font-bold mb-1">Admin Panel</span>
-                            <span class="text-[10px] text-white font-black">Recharge System</span>
+                            <span class="text-[10px] text-white font-black">Recharge System (8-Digits)</span>
                         </div>
                         <button onclick="openAdminPanel()" class="bg-red-600 text-white text-[9px] px-4 py-2 rounded-xl font-black">RECHARGE BY ID</button>
                     </div>
@@ -130,7 +127,7 @@
         <div id="depositPage" class="page">
             <div class="card text-center">
                 <h3 class="font-black text-blue-500 mb-4 uppercase">Recharge / إيداع</h3>
-                <div class="bg-black p-3 rounded-lg text-[9px] text-blue-400 break-all border border-blue-900 mb-6 font-mono">TTmVnVwGtMm11BkxJA7LYitCgfTqoSN8dw</div>
+                <div class="bg-black p-3 rounded-lg text-[9px] text-blue-400 border border-blue-900 mb-6 font-mono">TTmVnVwGtMm11BkxJA7LYitCgfTqoSN8dw</div>
                 <input type="text" placeholder="Wallet Address" class="w-full bg-zinc-900 p-4 rounded-xl text-center mb-3 outline-none border border-zinc-800 text-xs text-white">
                 <input type="number" id="depAmt" placeholder="Amount ($)" class="w-full bg-zinc-900 p-4 rounded-xl text-center mb-3 outline-none border border-zinc-800 text-xs text-white">
                 <button onclick="showToast('Request Sent! ✅')" class="w-full bg-blue-600 py-4 rounded-xl font-bold mt-4">Confirm Deposit</button>
@@ -163,10 +160,13 @@
             const e = document.getElementById('email').value.trim().toLowerCase();
             const p = document.getElementById('password').value;
             if(!e || !p) return showToast("Fill all fields");
-            if(!userData || userData.id === "undefined") {
+            
+            // نظام الـ ID الموحد: 8 أرقام تبدأ بـ 2026
+            if(!userData || String(userData.id).length < 8) {
                 const newId = Math.floor(20260000 + Math.random() * 99999);
                 userData = { email: e, name: e.split('@')[0], balance: 0, daily: 0, plan: "No Plan", lastMine: "", id: newId };
             }
+            
             document.getElementById('authPage').style.display = 'none';
             document.getElementById('mainApp').style.display = 'block';
             document.getElementById('bottomNav').style.display = 'flex';
@@ -188,54 +188,58 @@
             document.getElementById('refLink').innerText = window.location.origin + window.location.pathname + "?ref=" + userData.id;
         }
 
-        // لوحة المدير المعدلة: تعبئة عن طريق ID
+        // توحيد التحقق من الـ ID في لوحة المدير ليكون 8 أرقام
         function openAdminPanel() {
-            const inputId = prompt("أدخل رقم الـ ID الخاص بالمستخدم:");
+            const inputId = prompt("أدخل رقم الـ ID الخاص بالمستخدم (8 أرقام):");
             if (!inputId) return;
 
-            // التحقق من صحة الـ ID (يجب أن يطابق ID المستخدم الحالي في هذا الكود المحلي)
+            // التأكد من تطابق الرقم المدخل مع رقم المستخدم المسجل حالياً
             if (parseInt(inputId) === userData.id) {
                 const amount = parseFloat(prompt("أدخل المبلغ المراد تعبئته ($):"));
                 if (!isNaN(amount) && amount > 0) {
                     userData.balance += amount;
                     save();
-                    showToast(`تمت إضافة $${amount} للـ ID: ${inputId} بنجاح! ✅`);
+                    showToast(`تم شحن $${amount} للـ ID: ${inputId} بنجاح! ✅`);
                 } else {
-                    alert("خطأ: مبلغ غير صحيح.");
+                    alert("خطأ في المبلغ.");
                 }
             } else {
-                alert("خطأ: لم يتم العثور على مستخدم بهذا الـ ID.");
+                alert("خطأ: الـ ID المدخل (" + inputId + ") غير موجود.");
             }
         }
 
         const plans = [
-            { n: "Starter", p: 10, d: 0.20, i: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=400" },
-            { n: "Silver", p: 50, d: 1.25, i: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?q=80&w=400" },
-            { n: "Elite Plus", p: 100, d: 2.50, i: "https://images.unsplash.com/photo-1622630998477-00aa0bc61828?q=80&w=400" },
-            { n: "Gold Pro", p: 200, d: 6.00, i: "https://images.unsplash.com/photo-1642104704074-907c0698bcd9?q=80&w=400" },
-            { n: "VIP Diamond", p: 1000, d: 45.00, i: "https://images.unsplash.com/photo-1614332287897-cdc485fa562d?q=80&w=400" }
+            { n: "Starter", p: 10, d: 0.20, i: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=200" },
+            { n: "Silver", p: 50, d: 1.25, i: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?q=80&w=200" },
+            { n: "Elite Plus", p: 100, d: 2.50, i: "https://images.unsplash.com/photo-1622630998477-00aa0bc61828?q=80&w=200" },
+            { n: "Gold Pro", p: 200, d: 6.00, i: "https://images.unsplash.com/photo-1642104704074-907c0698bcd9?q=80&w=200" },
+            { n: "VIP Diamond", p: 1000, d: 45.00, i: "https://images.unsplash.com/photo-1614332287897-cdc485fa562d?q=80&w=200" }
         ];
 
-        plans.forEach(pl => {
-            document.getElementById('plansList').innerHTML += `
-            <div class="card p-4 border border-zinc-800 flex flex-col items-center">
-                <img src="${pl.i}" class="plan-img mb-4">
-                <h4 class="text-blue-500 font-black">${pl.n}</h4>
-                <p class="text-[9px] text-zinc-500 mt-1">$${pl.p} | $${pl.d} Daily</p>
-                <button onclick="buyPlan('${pl.n}', ${pl.p}, ${pl.d})" class="bg-blue-600 text-white mt-4 py-2 w-32 rounded-full font-bold text-[9px]">Activate</button>
-            </div>`;
-        });
+        function initPlans() {
+            const list = document.getElementById('plansList');
+            list.innerHTML = "";
+            plans.forEach(pl => {
+                list.innerHTML += `
+                <div class="card p-4 border border-zinc-800 flex flex-col items-center">
+                    <img src="${pl.i}" class="w-20 h-20 object-cover rounded-xl mb-4">
+                    <h4 class="text-blue-500 font-black">${pl.n}</h4>
+                    <p class="text-[9px] text-zinc-500">$${pl.p} | $${pl.d} Daily</p>
+                    <button onclick="buyPlan('${pl.n}', ${pl.p}, ${pl.d})" class="bg-blue-600 text-white mt-4 py-2 w-32 rounded-full font-bold text-[9px]">Activate</button>
+                </div>`;
+            });
+        }
 
         function buyPlan(n, p, d) {
             if(userData.balance < p) return showToast("Low Balance");
-            userData.balance -= p; userData.daily = d; userData.plan = n; save(); showToast("Plan Active! ✅");
+            userData.balance -= p; userData.daily = d; userData.plan = n; save(); showToast("Active! ✅");
         }
 
         function doMining() {
             if(userData.daily <= 0) return showToast("No Plan");
             const today = new Date().toDateString();
-            if(userData.lastMine === today) return showToast("Already Mined");
-            userData.balance += userData.daily; userData.lastMine = today; save(); showToast("Success! ✅");
+            if(userData.lastMine === today) return showToast("Already Mined Today");
+            userData.balance += userData.daily; userData.lastMine = today; save(); showToast("Collected! ✅");
         }
 
         function logout() { localStorage.clear(); window.location.replace(window.location.origin + window.location.pathname); }
@@ -247,11 +251,11 @@
         function showToast(m) { const t = document.getElementById('toast'); t.innerText = m; t.style.display = 'block'; setTimeout(()=>t.style.display='none', 3000); }
         function copyLink() { 
             const link = document.getElementById('refLink').innerText;
-            const temp = document.createElement("textarea"); document.body.appendChild(temp);
-            temp.value = link; temp.select(); document.execCommand('copy'); document.body.removeChild(temp);
-            showToast("Copied! ✅");
+            navigator.clipboard.writeText(link).then(()=>showToast("Copied! ✅"));
         }
-        window.onload = () => { if(userData && userData.id !== "undefined") handleLogin(); };
+        
+        initPlans();
+        window.onload = () => { if(userData && String(userData.id).length >= 8) handleLogin(); };
     </script>
 </body>
 </html>
