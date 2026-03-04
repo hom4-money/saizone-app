@@ -1,20 +1,13 @@
 {
-  "short_name": "Saizone",
-  "name": "Saizone Investment Company",
-  "icons": [
-    {
-      "src": "icon.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "icon.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
-  "start_url": ".",
+  "name": "SAIZONE",
+  "short_name": "SAIZONE",
+  "start_url": "/index.html",
   "display": "standalone",
-  "theme_color": "#1a4a8e",
-  "background_color": "#ffffff"
+  "background_color": "#0a0e17",
+  "theme_color": "#fdf04c",
+  "icons": [{
+    "src": "icon.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }]
 }
