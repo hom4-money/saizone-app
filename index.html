@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <link rel="manifest" href="manifest.json">
-<link rel="icon" href="icon.png">
-<link rel="apple-touch-icon" href="icon.png">
-<meta name="theme-color" content="#fdf04c">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SAIZONE | CLOUD MASTER EDITION</title>
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#fdf04c">
+    <link rel="icon" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
@@ -45,13 +47,13 @@
             background: radial-gradient(circle at 10% 20%, rgba(253, 240, 76, 0.08) 0%, transparent 25%),
                         radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 25%),
                         radial-gradient(circle at 50% 50%, rgba(100, 116, 139, 0.05) 0%, transparent 70%);
-            z-index: -2; pointer-events: none;
-        }
+            z-index: -2; pointer-events: none;        }
         
         .particles {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1; overflow: hidden;
-        }        
+        }
+        
         .particle {
             position: absolute; border-radius: 50%; background: var(--accent);
             animation: float 15s infinite linear; opacity: 0.2;
@@ -70,7 +72,7 @@
         ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #e6d946; }
 
-        /* === COUPON & CONTEST STYLES === */
+        /* COUPON & CONTEST STYLES */
         .coupon-card {
             background: linear-gradient(145deg, rgba(253, 240, 76, 0.1), rgba(59, 130, 246, 0.1));
             border: 1px solid var(--accent);
@@ -94,13 +96,13 @@
             padding: 12px 16px;
             color: var(--text-primary);
             font-size: 14px;
-            text-align: center;
-            letter-spacing: 2px;
+            text-align: center;            letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: 600;
         }
         .coupon-input:focus {
-            border-color: var(--accent);            box-shadow: 0 0 0 3px var(--accent-glow);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
             outline: none;
         }
         .contest-card {
@@ -143,13 +145,13 @@
             background: linear-gradient(45deg, #f59e0b, #d97706);
             color: #0a0e17;
             font-weight: 800;
-            padding: 4px 12px;
-            border-radius: 15px;
+            padding: 4px 12px;            border-radius: 15px;
             font-size: 0.8rem;
             box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
         }
         @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }            50% { opacity: 0.8; transform: scale(0.98); }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(0.98); }
         }
     </style>
 </head>
@@ -477,7 +479,7 @@
         .logout-btn { width: 100%; padding: 16px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 20px; color: var(--danger); font-weight: 700; font-size: 1rem; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 15px; }
         .logout-btn:hover { background: rgba(239, 68, 68, 0.2); border-color: var(--danger); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(239, 68, 68, 0.3); }
         
-        /* === FIXED ADMIN MODAL WITH SCROLL === */
+        /* FIXED ADMIN MODAL WITH SCROLL */
         #adminModal { 
             position: fixed; 
             inset: 0; 
@@ -499,24 +501,11 @@
             overflow-x: hidden;
         }
         
-        #adminModal .card::-webkit-scrollbar { 
-            width: 6px; 
-        }
-        
-        #adminModal .card::-webkit-scrollbar-track {             background: rgba(30, 35, 60, 0.5); 
-            border-radius: 10px; 
-        }
-        
-        #adminModal .card::-webkit-scrollbar-thumb { 
-            background: var(--accent); 
-            border-radius: 10px; 
-        }
-        
-        #adminModal .card::-webkit-scrollbar-thumb:hover { 
-            background: #e6d946; 
-        }
-        
-        .admin-title { font-size: 1.5rem; font-weight: 800; text-align: center; margin-bottom: 25px; background: linear-gradient(45deg, var(--accent), var(--secondary)); -webkit-background-clip: text; background-clip: text; color: transparent; text-transform: uppercase; letter-spacing: 1px; }
+        #adminModal .card::-webkit-scrollbar { width: 6px; }
+        #adminModal .card::-webkit-scrollbar-track { background: rgba(30, 35, 60, 0.5); border-radius: 10px; }
+        #adminModal .card::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+        #adminModal .card::-webkit-scrollbar-thumb:hover { background: #e6d946; }
+                .admin-title { font-size: 1.5rem; font-weight: 800; text-align: center; margin-bottom: 25px; background: linear-gradient(45deg, var(--accent), var(--secondary)); -webkit-background-clip: text; background-clip: text; color: transparent; text-transform: uppercase; letter-spacing: 1px; }
         .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 15px 0; }
         .input-style { width: 100%; background: rgba(30, 35, 60, 0.7); border: 1px solid var(--border); border-radius: 18px; padding: 14px 20px; color: var(--text-primary); outline: none; margin-bottom: 12px; font-size: 15px; transition: var(--transition); text-align: center; }
         .input-style:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); background: rgba(35, 40, 65, 0.9); }
@@ -552,7 +541,8 @@
         .text-center { text-align: center; }
         .text-xs { font-size: 0.75rem; }
         .text-sm { font-size: 0.875rem; }
-        .text-lg { font-size: 1.125rem; }        .text-xl { font-size: 1.25rem; }
+        .text-lg { font-size: 1.125rem; }
+        .text-xl { font-size: 1.25rem; }
         .font-bold { font-weight: 700; }
         .mb-2 { margin-bottom: 0.5rem; }
         .mb-3 { margin-bottom: 0.75rem; }
@@ -564,8 +554,7 @@
         .mt-4 { margin-top: 1rem; }
         .mt-6 { margin-top: 1.5rem; }
         .mt-8 { margin-top: 2rem; }
-        .p-3 { padding: 0.75rem; }
-        .p-4 { padding: 1rem; }
+        .p-3 { padding: 0.75rem; }        .p-4 { padding: 1rem; }
         .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
         .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
         .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
@@ -593,12 +582,11 @@
     </style>
 </head>
 <body>
-  <!-- FIXED ADMIN MODAL WITH SCROLL -->
+  <!-- ADMIN MODAL -->
     <div id="adminModal" onclick="if(event.target == this) closeAdminModal()">
         <div class="card" onclick="event.stopPropagation()">
             <h3 class="admin-title">لوحة التحكم الرئيسية</h3>
             
-            <!-- User Management -->
             <div style="margin-bottom: 20px;">
                 <input type="number" id="adminTargetId" placeholder="UID العميل (بدون أصفار)" class="input-style">
                 <input type="number" id="adminAmount" placeholder="شحن/خصم رصيد (+/-)" class="input-style">
@@ -642,13 +630,14 @@
                     <button onclick="showCommissionStats()" class="btn-accent flex-1 py-3 text-xs uppercase">📊 الإحصائيات</button>
                 </div>
                 <div class="coupon-list" id="commissionList">
-                    <p class="text-center text-secondary text-sm">اضغط تحديث لعرض السجل...</p>                </div>
-            </div>
+                    <p class="text-center text-secondary text-sm">اضغط تحديث لعرض السجل...</p>
+                </div>            </div>
             
             <button onclick="closeAdminModal()" class="w-full btn-outline py-3 text-xs mt-4 uppercase">إغلاق</button>
         </div>
     </div>
 
+    <!-- Auth Container -->
     <div id="authContainer" class="auth-container">
         <div class="auth-card">
             <div class="curved-shape"></div>
@@ -914,14 +903,12 @@
             </div>
         </div>
         
-        <!-- WITHDRAW PAGE WITH COMMISSION -->
         <div id="withdrawPage" class="page">
             <div class="card w-full max-w-[360px]">
                 <div class="card-header text-center mb-6">
                     <h3 class="card-title">سحب الأرباح</h3>
-                    <p class="card-subtitle">سحب إلى محفظتك (TRC20)</p>                </div>
-                
-                <!-- Commission Info Box -->
+                    <p class="card-subtitle">سحب إلى محفظتك (TRC20)</p>
+                </div>                
                 <div class="bg-white/5 rounded-xl p-4 mb-4 border border-white/10">
                     <div class="flex items-center justify-between text-sm">
                         <span class="text-secondary">عمولة السحب</span>
@@ -940,7 +927,6 @@
                 <input type="text" id="witAddress" placeholder="عنوان المحفظة (TRC20)" class="input-style">
                 <input type="number" id="witAmount" placeholder="أدخل المبلغ المطلوب سحبه" class="input-style" oninput="calculateCommission()">
                 
-                <!-- Commission Display -->
                 <div id="commissionDisplay" class="hidden bg-white/5 rounded-xl p-4 mt-4 border border-white/10">
                     <div class="flex items-center justify-between mb-2">
                         <span class="text-secondary text-sm">المبلغ المطلوب</span>
@@ -968,10 +954,10 @@
             </div>
         </div>
         
-        <div id="supportPage" class="page">            <div class="card text-center w-full max-w-[320px] py-12">
+        <div id="supportPage" class="page">
+            <div class="card text-center w-full max-w-[320px] py-12">
                 <i class="fa-brands fa-telegram text-6xl text-secondary mb-6"></i>
-                <h3 class="text-xl font-bold text-secondary mb-3">الدعم الفني</h3>
-                <p class="text-secondary mb-8">فريق الدعم جاهز لمساعدتك على مدار الساعة</p>
+                <h3 class="text-xl font-bold text-secondary mb-3">الدعم الفني</h3>                <p class="text-secondary mb-8">فريق الدعم جاهز لمساعدتك على مدار الساعة</p>
                 <button onclick="window.open('https://t.me/Hassan20005pp_bot')" class="w-full btn-3d py-4 text-sm font-bold flex items-center justify-center gap-3">
                     <i class="fa-brands fa-telegram text-2xl"></i> تواصل مع الدعم
                 </button>
@@ -1014,7 +1000,6 @@
         let userData = null;
         const CRYPTO_ADDRESS = "TTmVnVwGtMm11BkxJA7LYitCgfTqoSN8dw";
 
-        // CONTEST & COMMISSION CONFIG
         const CONTEST_CONFIG = {
             targetReferrals: 10,
             minPlanId: 3,
@@ -1023,7 +1008,7 @@
             active: true
         };
         
-        const WITHDRAW_COMMISSION_RATE = 0.10; // 10% commission
+        const WITHDRAW_COMMISSION_RATE = 0.10;
 
         function initParticles() {
             const container = document.getElementById('particles');
@@ -1059,7 +1044,6 @@
         }
         function closeAdminModal() { document.getElementById('adminModal').style.display = 'none'; }
 
-        // === COMMISSION CALCULATION ===
         function calculateCommission() {
             const amountInput = document.getElementById('witAmount');
             const amount = parseFloat(amountInput?.value) || 0;
@@ -1076,7 +1060,6 @@
                 displayEl.classList.add('hidden');
             }
         }
-        // === SEND TO BOT (WITH COMMISSION) ===
         async function sendToBot(type) {
             let msg = "";
             if(type === 'deposit') {
@@ -1095,26 +1078,16 @@
                 if(!ad || ad.length < 30) return showToast("عنوان محفظة غير صحيح", 'error');
                 if(!am || am < 5) return showToast("الحد الأدنى للسحب هو $5", 'error');
                 
-                // Calculate commission
                 const commission = am * WITHDRAW_COMMISSION_RATE;
                 const receiveAmount = am - commission;
-                const totalDeducted = am;
                 
                 if(am > userData.balance) return showToast("الرصيد غير كافي", 'error');
                 
-                msg = "💰 *طلب سحب*\n" +
-                      "👤 " + userData.name + "\n" +
-                      "🆔 UID: " + userData.id + "\n" +
-                      "💵 المبلغ المطلوب: $" + am.toFixed(2) + "\n" +
-                      "💸 عمولة 10%: -$" + commission.toFixed(2) + "\n" +
-                      "✅ سيصله: $" + receiveAmount.toFixed(2) + "\n" +
-                      "🏦 العنوان: " + ad;
+                msg = "💰 *طلب سحب*\n👤 " + userData.name + "\n🆔 UID: " + userData.id + "\n💵 المبلغ: $" + am.toFixed(2) + "\n💸 عمولة 10%: -$" + commission.toFixed(2) + "\n✅ سيصله: $" + receiveAmount.toFixed(2) + "\n🏦 العنوان: " + ad;
                 
-                // Deduct from balance
-                userData.balance -= totalDeducted;
+                userData.balance -= am;
                 userData.lastWithdraw = Date.now();
                 
-                // Track commission for admin
                 await db.ref('commissionRecords').push({
                     userId: userData.id,
                     userName: userData.name,
@@ -1136,14 +1109,13 @@
                 });
                 if(!response.ok) throw new Error('Error');
                 showToast("تم بنجاح ✅", 'success');
-                document.getElementById('depAmount').value = '';
-                document.getElementById('witAddress').value = '';
+                document.getElementById('depAmount').value = '';                document.getElementById('witAddress').value = '';
                 document.getElementById('witAmount').value = '';
                 document.getElementById('commissionDisplay').classList.add('hidden');
                 updateUI();
             } catch(e) { showToast("خطأ في الاتصال", 'error'); }
         }
-        // === ADMIN FUNCTIONS ===
+
         async function executeAdminAction(type) {
             const tid = document.getElementById('adminTargetId').value.trim();
             if(!tid) { showToast("أدخل UID العميل", 'error'); return; }
@@ -1186,13 +1158,13 @@
                         target.plan = plan.n; target.planId = plan.id; target.daily = plan.d; 
                         showToast("تم تعيين " + plan.n + " ✅", 'success'); 
                     } else { return showToast("باقة غير صحيحة", 'error'); }
-                }
-                await db.ref('users/' + actualUid).update(target);
+                }                await db.ref('users/' + actualUid).update(target);
                 if(userData && (userData.id == tid || userData.id == tidNum || userData.id.toString() === actualUid)) { 
                     userData = Object.assign({}, target); updateUI(); 
                 }
                 showToast("تم التحديث ✅", 'success'); closeAdminModal();
-            } catch(e) { console.error('Admin Error:', e); showToast("خطأ: " + e.message, 'error'); }        }
+            } catch(e) { console.error('Admin Error:', e); showToast("خطأ: " + e.message, 'error'); }
+        }
 
         async function listAllUsers() {
             try {
@@ -1212,8 +1184,7 @@
                 alert(userList); showToast("تم عرض المستخدمين ✅", 'success');
             } catch(e) { showToast("خطأ: " + e.message, 'error'); }
         }
-
-        // === COUPON SYSTEM ===
+        // === COUPON SYSTEM (FIXED) ===
         async function createCoupon() {
             if(userData?.email !== MASTER_ADMIN) { showToast("❌ غير مصرح لك", 'error'); return; }
             const code = document.getElementById('adminCouponCode')?.value.trim().toUpperCase();
@@ -1225,9 +1196,15 @@
                 const existing = await db.ref('coupons/' + code).once('value');
                 if(existing.exists()) return showToast("⚠️ هذا الكود مستخدم مسبقاً", 'error');
                 await db.ref('coupons/' + code).set({
-                    code: code, value: value, usedBy: null,
+                    code: code,
+                    value: value,
+                    usedBy: null,
+                    usedAt: null,
+                    usedByEmail: null,
                     createdAt: firebase.database.ServerValue.TIMESTAMP,
-                    active: true, createdBy: userData.id, createdByEmail: userData.email
+                    active: true,
+                    createdBy: userData.id,
+                    createdByEmail: userData.email
                 });
                 showToast("✅ تم إنشاء الكوبون: " + code, 'success');
                 document.getElementById('adminCouponCode').value = '';
@@ -1241,15 +1218,25 @@
             const listEl = document.getElementById('adminCouponList');
             if(!listEl) return;
             listEl.innerHTML = '<p class="text-center text-secondary text-sm">⏳ جاري التحميل...</p>';
-            try {                const snap = await db.ref('coupons').orderByChild('createdAt').limitToLast(50).once('value');
+            try {
+                const snap = await db.ref('coupons').orderByChild('createdAt').limitToLast(50).once('value');
                 const coupons = snap.val();
                 if(!coupons) { listEl.innerHTML = '<p class="text-center text-secondary text-sm">لا يوجد كوبونات بعد</p>'; return; }
                 let html = '';
                 Object.values(coupons).reverse().forEach(c => {
-                    const statusBadge = c.usedBy ? '<span class="text-success text-xs">✅ مُستخدم</span>' : '<span class="text-accent text-xs">⏳ متاح</span>';
+                    let statusBadge, statusText;
+                    if(c.active === false) {
+                        statusBadge = '<span class="text-danger text-xs">❌ غير نشط</span>';
+                        statusText = 'غير نشط';
+                    } else if(c.usedBy && c.usedBy !== null) {
+                        statusBadge = '<span class="text-success text-xs">✅ مُستخدم</span>';
+                        statusText = 'مستخدم';
+                    } else {
+                        statusBadge = '<span class="text-accent text-xs">⏳ متاح</span>';
+                        statusText = 'متاح';                    }
                     const usedInfo = c.usedBy ? `<br><span class="text-xs text-secondary">👤 UID: ${c.usedBy}</span>` : '';
                     const dateStr = c.createdAt ? new Date(c.createdAt).toLocaleDateString('ar-EG') : '';
-                    html += `<div class="coupon-item ${c.usedBy ? 'used' : ''}"><div style="text-align: right; flex: 1;"><strong style="color: var(--accent); font-family: monospace;">${c.code}</strong><br><span class="text-secondary">$${c.value} • ${dateStr}${usedInfo}</span></div><div style="margin-right: 10px;">${statusBadge}</div></div>`;
+                    html += `<div class="coupon-item ${c.usedBy ? 'used' : ''}"><div style="text-align: right; flex: 1;"><strong style="color: var(--accent); font-family: monospace;">${c.code}</strong><br><span class="text-secondary">$${c.value} • ${dateStr}${usedInfo}</span><br><span class="text-xs ${c.active ? 'text-success' : 'text-danger'}">الحالة: ${statusText}</span></div><div style="margin-right: 10px;">${statusBadge}</div></div>`;
                 });
                 listEl.innerHTML = html || '<p class="text-center text-secondary text-sm">لا يوجد كوبونات</p>';
             } catch(e) { console.error('Load coupons error:', e); listEl.innerHTML = '<p class="text-center text-danger text-sm">❌ خطأ في التحميل</p>'; }
@@ -1271,32 +1258,106 @@
             } catch(e) { showToast("❌ خطأ: " + e.message, 'error'); }
         }
 
+        // === FIXED REDEEM COUPON ===
         async function redeemCoupon() {
             const codeInput = document.getElementById('couponCode');
             const code = codeInput?.value.trim().toUpperCase();
+            
             if(!code) return showToast("⚠️ أدخل كود الكوبون", 'error');
             if(!userData?.id) return showToast("⚠️ يجب تسجيل الدخول أولاً", 'error');
-            if(userData.usedCouponCodes && userData.usedCouponCodes.includes(code)) return showToast("⚠️ لقد استخدمت هذا الكوبون مسبقاً", 'error');
+            
+            if(userData.usedCouponCodes && userData.usedCouponCodes.includes(code)) {
+                return showToast("⚠️ لقد استخدمت هذا الكوبون مسبقاً", 'error');
+            }
+            
             try {
                 showToast("⏳ جاري التحقق...", 'success');
+                
                 const couponRef = db.ref('coupons/' + code);
                 const snap = await couponRef.once('value');
-                if(!snap.exists()) return showToast("❌ كوبون غير صحيح", 'error');
+                
+                if(!snap.exists()) {
+                    return showToast("❌ كوبون غير صحيح", 'error');
+                }
+                
                 const coupon = snap.val();
-                if(!coupon.active) return showToast("❌ هذا الكوبون غير نشط", 'error');
-                if(coupon.usedBy) return showToast("❌ هذا الكوبون مُستخدم مسبقاً", 'error');
-                const result = await couponRef.transaction(current => {
-                    if(current && !current.usedBy && current.active) return { ...current, usedBy: userData.id, usedAt: firebase.database.ServerValue.TIMESTAMP };
-                    return undefined;
+                
+                if(coupon.active === false) {                    return showToast("❌ هذا الكوبون غير نشط", 'error');
+                }
+                
+                if(coupon.usedBy && coupon.usedBy !== null) {
+                    return showToast("❌ هذا الكوبون مُستخدم مسبقاً من حساب آخر", 'error');
+                }
+                
+                const transactionResult = await couponRef.transaction(currentData => {
+                    if (currentData) {
+                        if (currentData.usedBy && currentData.usedBy !== null) {
+                            return null;
+                        }
+                        currentData.usedBy = userData.id;
+                        currentData.usedAt = firebase.database.ServerValue.TIMESTAMP;
+                        currentData.usedByEmail = userData.email;
+                        return currentData;
+                    }
+                    return null;
                 });
-                if(!result.committed) return showToast("❌ الكوبون أصبح غير متاح", 'error');
-                const newBalance = (userData.balance || 0) + coupon.value;                const usedCoupons = [...(userData.usedCouponCodes || []), code];
-                await db.ref('users/' + userData.id).update({ balance: newBalance, usedCouponCodes: usedCoupons, couponRewards: firebase.database.ServerValue.increment(coupon.value) });
-                await db.ref('couponHistory').push({ code: code, value: coupon.value, userId: userData.id, userName: userData.name, redeemedAt: firebase.database.ServerValue.TIMESTAMP });
-                userData.balance = newBalance; userData.usedCouponCodes = usedCoupons;
-                updateUI(); showToast(`🎉 مبروك! تم إضافة $${coupon.value} لرصيدك ✨`, 'success');
-                if(codeInput) codeInput.value = '';
-            } catch(e) { console.error('Redeem error:', e); showToast("❌ خطأ في المعالجة", 'error'); }
+                
+                if (!transactionResult.committed) {
+                    return showToast("❌ الكوبون أصبح غير متاح (تم استخدامه للتو)", 'error');
+                }
+                
+                const couponValue = coupon.value || 0;
+                const newBalance = (userData.balance || 0) + couponValue;
+                const usedCoupons = [...(userData.usedCouponCodes || []), code];
+                
+                await db.ref('users/' + userData.id).update({ 
+                    balance: newBalance, 
+                    usedCouponCodes: usedCoupons,
+                    couponRewards: firebase.database.ServerValue.increment(couponValue)
+                });
+                
+                await db.ref('couponHistory').push({ 
+                    code: code, 
+                    value: couponValue, 
+                    userId: userData.id, 
+                    userName: userData.name,
+                    userEmail: userData.email,
+                    redeemedAt: firebase.database.ServerValue.TIMESTAMP 
+                });
+                
+                userData.balance = newBalance; 
+                userData.usedCouponCodes = usedCoupons;
+                
+                updateUI(); 
+                showToast(`🎉 مبروك! تم إضافة $${couponValue} لرصيدك ✨`, 'success');
+                
+                if(codeInput) codeInput.value = '';                
+            } catch(e) { 
+                console.error('Redeem error:', e); 
+                showToast("❌ خطأ في المعالجة: " + e.message, 'error'); 
+            }
+        }
+
+        async function checkCouponStatus(code) {
+            try {
+                const snap = await db.ref('coupons/' + code).once('value');
+                if(!snap.exists()) {
+                    console.log('❌ الكوبون غير موجود');
+                    return null;
+                }
+                const coupon = snap.val();
+                console.log('✅ حالة الكوبون:', {
+                    code: coupon.code,
+                    value: coupon.value,
+                    active: coupon.active,
+                    usedBy: coupon.usedBy,
+                    createdAt: coupon.createdAt
+                });
+                return coupon;
+            } catch(e) {
+                console.error('Check coupon error:', e);
+                return null;
+            }
         }
         // === CONTEST SYSTEM ===
         async function updateContestProgress() {
@@ -1347,7 +1408,8 @@
             if(!refId || refId === newUserId) return;
             try {
                 const refSnap = await db.ref('users/' + refId).once('value');
-                if(refSnap.exists()) {                    await db.ref('users/' + newUserId).update({ referredBy: parseInt(refId), referredAt: firebase.database.ServerValue.TIMESTAMP });
+                if(refSnap.exists()) {
+                    await db.ref('users/' + newUserId).update({ referredBy: parseInt(refId), referredAt: firebase.database.ServerValue.TIMESTAMP });
                     await db.ref('users/' + refId).update({ referrals: firebase.database.ServerValue.increment(1) });
                     return true;
                 }
@@ -1360,119 +1422,43 @@
             return `${baseUrl}?ref=${userData?.id || ''}`;
         }
 
-        // === COMMISSION RECORDS (FIXED) ===
+        // === COMMISSION RECORDS ===
         async function loadCommissionRecords() {
-            if(userData?.email !== MASTER_ADMIN) {
-                showToast("❌ غير مصرح لك", 'error');
-                return;
-            }
-            
+            if(userData?.email !== MASTER_ADMIN) { showToast("❌ غير مصرح لك", 'error'); return; }
             const listEl = document.getElementById('commissionList');
-            if(!listEl) {
-                console.error('commissionList element not found');
-                return;
-            }
-            
+            if(!listEl) return;
             listEl.innerHTML = '<p class="text-center text-secondary text-sm">⏳ جاري التحميل...</p>';
-            
             try {
                 const snap = await db.ref('commissionRecords').orderByChild('timestamp').limitToLast(30).once('value');
                 const records = snap.val();
-                
-                if(!records) {
-                    listEl.innerHTML = '<p class="text-center text-secondary text-sm">لا يوجد سجلات سحب بعد</p>';
-                    return;
-                }
-                
+                if(!records) { listEl.innerHTML = '<p class="text-center text-secondary text-sm">لا يوجد سجلات سحب بعد</p>'; return; }
                 let html = '';
                 let totalCommission = 0;
-                
                 Object.values(records).reverse().forEach(r => {
                     totalCommission += (r.commissionAmount || 0);
                     const dateStr = r.timestamp ? new Date(r.timestamp).toLocaleDateString('ar-EG') : '';
-                    html += `
-                        <div class="coupon-item">
-                            <div style="text-align: right; flex: 1;">
-                                <strong style="color: var(--accent);">${r.userName || 'مستخدم'}</strong><br>
-                                <span class="text-secondary text-xs">UID: ${r.userId || '---'} • ${dateStr}</span><br>
-                                <span class="text-xs">سحب: $${r.withdrawAmount || 0} | عمولة: <span class="text-danger">$${(r.commissionAmount || 0).toFixed(2)}</span></span>
-                            </div>                            <div style="margin-right: 10px; text-align: left;">
-                                <span class="text-success text-xs">وصل: $${(r.receiveAmount || 0).toFixed(2)}</span>
-                            </div>
-                        </div>
-                    `;
+                    html += `<div class="coupon-item"><div style="text-align: right; flex: 1;"><strong style="color: var(--accent);">${r.userName || 'مستخدم'}</strong><br><span class="text-secondary text-xs">UID: ${r.userId || '---'} • ${dateStr}</span><br><span class="text-xs">سحب: $${r.withdrawAmount || 0} | عمولة: <span class="text-danger">$${(r.commissionAmount || 0).toFixed(2)}</span></span></div><div style="margin-right: 10px; text-align: left;"><span class="text-success text-xs">وصل: $${(r.receiveAmount || 0).toFixed(2)}</span></div></div>`;
                 });
-                
-                // Add summary
-                const summaryHtml = `
-                    <div style="background: rgba(253, 240, 76, 0.1); border: 1px solid var(--accent); border-radius: 10px; padding: 10px; margin-bottom: 10px;">
-                        <div class="flex justify-between text-xs">
-                            <span class="text-secondary">إجمالي العمولات:</span>
-                            <span class="text-accent font-bold">$${totalCommission.toFixed(2)}</span>
-                        </div>
-                        <div class="flex justify-between text-xs mt-1">
-                            <span class="text-secondary">عدد العمليات:</span>
-                            <span class="text-primary">${Object.keys(records).length}</span>
-                        </div>
-                    </div>
-                `;
-                
+                const summaryHtml = `<div style="background: rgba(253, 240, 76, 0.1); border: 1px solid var(--accent); border-radius: 10px; padding: 10px; margin-bottom: 10px;"><div class="flex justify-between text-xs"><span class="text-secondary">إجمالي العمولات:</span><span class="text-accent font-bold">$${totalCommission.toFixed(2)}</span></div><div class="flex justify-between text-xs mt-1"><span class="text-secondary">عدد العمليات:</span><span class="text-primary">${Object.keys(records).length}</span></div></div>`;
                 listEl.innerHTML = summaryHtml + html;
                 showToast("✅ تم تحميل السجل", 'success');
-                
-            } catch(e) {
-                console.error('Load commission error:', e);
-                listEl.innerHTML = '<p class="text-center text-danger text-sm">❌ خطأ في التحميل: ' + e.message + '</p>';
-                showToast("❌ خطأ في التحميل", 'error');
-            }
+            } catch(e) { console.error('Load commission error:', e); listEl.innerHTML = '<p class="text-center text-danger text-sm">❌ خطأ في التحميل</p>'; }
         }
 
         async function showCommissionStats() {
-            if(userData?.email !== MASTER_ADMIN) {
-                showToast("❌ غير مصرح لك", 'error');
-                return;
-            }
-            
+            if(userData?.email !== MASTER_ADMIN) { showToast("❌ غير مصرح لك", 'error'); return; }
             try {
                 showToast("⏳ جاري الحساب...", 'success');
-                
                 const snap = await db.ref('commissionRecords').once('value');
                 const records = snap.val();
-                
-                if(!records) {
-                    showToast("⚠️ لا يوجد سجلات عمولات بعد", 'error');
-                    return;
-                }
-                
-                let totalCommission = 0;
-                let totalWithdrawals = 0;                let count = 0;
-                let usersCount = new Set();
-                
-                Object.values(records).forEach(r => {
-                    totalCommission += (r.commissionAmount || 0);
-                    totalWithdrawals += (r.withdrawAmount || 0);
-                    count++;
-                    if(r.userId) usersCount.add(r.userId);
-                });
-                
+                if(!records) { showToast("⚠️ لا يوجد سجلات عمولات بعد", 'error'); return; }
+                let totalCommission = 0, totalWithdrawals = 0, count = 0, usersCount = new Set();
+                Object.values(records).forEach(r => { totalCommission += (r.commissionAmount || 0); totalWithdrawals += (r.withdrawAmount || 0); count++; if(r.userId) usersCount.add(r.userId); });
                 const avgCommission = count > 0 ? (totalCommission / count) : 0;
-                
-                const statsMsg = `📊 *إحصائيات العمولات*\n\n` +
-                                `📈 إجمالي السحوبات: $${totalWithdrawals.toFixed(2)}\n` +
-                                `💰 إجمالي العمولات: $${totalCommission.toFixed(2)}\n` +
-                                `👥 عدد المستخدمين: ${usersCount.size}\n` +
-                                `📝 عدد العمليات: ${count}\n` +
-                                `📊 متوسط العمولة: $${avgCommission.toFixed(2)}`;
-                
-                alert(statsMsg);
-                showToast("✅ تم عرض الإحصائيات", 'success');
-                
-            } catch(e) {
-                console.error('Stats error:', e);
-                showToast("❌ خطأ: " + e.message, 'error');
-            }
+                const statsMsg = `📊 *إحصائيات العمولات*\n\n📈 إجمالي السحوبات: $${totalWithdrawals.toFixed(2)}\n💰 إجمالي العمولات: $${totalCommission.toFixed(2)}\n👥 عدد المستخدمين: ${usersCount.size}\n📝 عدد العمليات: ${count}\n📊 متوسط العمولة: $${avgCommission.toFixed(2)}`;
+                alert(statsMsg); showToast("✅ تم عرض الإحصائيات", 'success');
+            } catch(e) { showToast("❌ خطأ: " + e.message, 'error'); }
         }
-        // === UPDATE UI ===
         function updateUI() {
             if(!userData) return;
             document.getElementById('pBalance').innerText = (userData.balance || 0).toFixed(2);
@@ -1568,7 +1554,6 @@
                 } catch(e) { console.error('Logout error:', e); window.location.href = window.location.href.split('?')[0].split('#')[0]; }
             } 
         }
-        // === LOGIN & SIGNUP ===
         async function handleLogin(e) {
             e.preventDefault();
             const email = document.getElementById('loginEmail').value.trim().toLowerCase();
@@ -1607,13 +1592,10 @@
                 const uid = Math.floor(100000 + Math.random() * 900000);
                 const newUser = { email: email, name: name, balance: 0, daily: 0, plan: "لا توجد باقة", planId: 0, lastMine: "", id: uid, isFrozen: false, lastWithdraw: 0, createdAt: Date.now(), referrals: 0, totalEarned: 0 };
                 await db.ref('users/' + uid).set(newUser);
-                
-                // REFERRAL TRACKING
                 const urlParams = new URLSearchParams(window.location.search); const refId = urlParams.get('ref');
                 if(refId && refId !== uid.toString()) {
                     try { const refSnap = await db.ref('users/' + refId).once('value'); if(refSnap.exists()) { await db.ref('users/' + uid).update({ referredBy: parseInt(refId), referredAt: firebase.database.ServerValue.TIMESTAMP }); await db.ref('users/' + refId).update({ referrals: firebase.database.ServerValue.increment(1) }); setTimeout(() => { showToast('🎁 تمت الإحالة بنجاح! استكشف المكافآت', 'success'); }, 1500); } } catch(e) { console.error('Referral tracking error:', e); }
                 }
-                
                 userData = newUser; localStorage.setItem('saizone_uid', userData.id); localStorage.setItem('saizone_user', JSON.stringify(userData));
                 document.getElementById('authContainer').classList.add('hidden');
                 setTimeout(function() { document.getElementById('authContainer').style.display = 'none'; document.getElementById('mainApp').style.display = 'block'; document.getElementById('bottomNav').style.display = 'flex'; initPlans(); updateUI(); showToast("تم إنشاء الحساب! 🎉", 'success'); }, 400);
@@ -1622,7 +1604,6 @@
         
         function resetButton(btn, originalText) { btn.classList.remove('loading'); btn.disabled = false; btn.innerHTML = originalText; }
 
-        // === WINDOW ONLOAD ===
         window.onload = function() {
             try {
                 initParticles();
@@ -1635,15 +1616,9 @@
                         if(snap.exists()) {
                             userData = snap.val(); localStorage.setItem('saizone_user', JSON.stringify(userData));
                             authContainer.style.display = 'none'; mainApp.style.display = 'block'; if(bottomNav) bottomNav.style.display = 'flex';
-                            if(userData.email === MASTER_ADMIN) { 
-                                const adminPanel = document.getElementById('masterAdminPanel'); 
-                                if(adminPanel) adminPanel.style.display = 'block';
-                            }
+                            if(userData.email === MASTER_ADMIN) { const adminPanel = document.getElementById('masterAdminPanel'); if(adminPanel) adminPanel.style.display = 'block'; }
                             initPlans(); updateUI(); showToast("مرحباً بعودتك! ✨", 'success');
-                            if(userData.email === MASTER_ADMIN) { 
-                                setTimeout(loadAdminCoupons, 1000); 
-                                setTimeout(loadCommissionRecords, 2000); 
-                            }
+                            if(userData.email === MASTER_ADMIN) { setTimeout(loadAdminCoupons, 1000); setTimeout(loadCommissionRecords, 2000); }
                             setTimeout(initContestSystem, 1500);
                         } else { localStorage.removeItem('saizone_uid'); localStorage.removeItem('saizone_user'); authContainer.style.display = 'flex'; mainApp.style.display = 'none'; }
                     }).catch(function(error) { console.error('Firebase error:', error); authContainer.style.display = 'flex'; mainApp.style.display = 'none'; });
@@ -1655,6 +1630,15 @@
         };
         
         window.addEventListener('resize', function() { const c = document.getElementById('particles'); if(c.children.length < 10) { c.innerHTML = ''; initParticles(); } });
+
+        // PWA Service Worker
+        if('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('✅ Service Worker registered', reg))
+                    .catch(err => console.log('❌ Service Worker error', err));
+            });
+        }
     </script>
 </body>
 </html>
