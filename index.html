@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SAIZONE | CLOUD MASTER EDITION</title>
     
+    <!-- ✅ إصلاح: إضافة base tag لضمان عمل المسارات النسبية على GitHub Pages -->
+    <base href=".">
+    
     <!-- PWA -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#fdf04c">
@@ -44,10 +47,10 @@
         
         body::before {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 10% 20%, rgba(253, 240, 76, 0.08) 0%, transparent 25%),
-                        radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 25%),
+            background: radial-gradient(circle at 10% 20%, rgba(253, 240, 76, 0.08) 0%, transparent 25%),                        radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 25%),
                         radial-gradient(circle at 50% 50%, rgba(100, 116, 139, 0.05) 0%, transparent 70%);
-            z-index: -2; pointer-events: none;        }
+            z-index: -2; pointer-events: none;
+        }
         
         .particles {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -93,10 +96,10 @@
             background: rgba(30, 35, 60, 0.7);
             border: 1px solid var(--border);
             border-radius: 14px;
-            padding: 12px 16px;
-            color: var(--text-primary);
+            padding: 12px 16px;            color: var(--text-primary);
             font-size: 14px;
-            text-align: center;            letter-spacing: 2px;
+            text-align: center;
+            letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: 600;
         }
@@ -142,10 +145,10 @@
             animation: pulse 2s infinite;
         }
         .winner-badge {
-            background: linear-gradient(45deg, #f59e0b, #d97706);
-            color: #0a0e17;
+            background: linear-gradient(45deg, #f59e0b, #d97706);            color: #0a0e17;
             font-weight: 800;
-            padding: 4px 12px;            border-radius: 15px;
+            padding: 4px 12px;
+            border-radius: 15px;
             font-size: 0.8rem;
             box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
         }
@@ -582,7 +585,7 @@
     </style>
 </head>
 <body>
-  <!-- ADMIN MODAL -->
+    <!-- ADMIN MODAL -->
     <div id="adminModal" onclick="if(event.target == this) closeAdminModal()">
         <div class="card" onclick="event.stopPropagation()">
             <h3 class="admin-title">لوحة التحكم الرئيسية</h3>
@@ -690,8 +693,8 @@
                 </form>
             </div>
         </div>
-    </div>
-    <div id="mainApp">
+    </div
+      <div id="mainApp">
         <div id="profilePage" class="page active">
             <div class="profile-header">
                 <div class="profile-avatar-container animate-float">
@@ -838,8 +841,7 @@
                 <p class="text-xs text-secondary mt-4 text-center">
                     <i class="fa-solid fa-circle-info me-1"></i>
                     تُحتسب الإحالات التي اشترت باقة 100$ (فولاذ) أو أكثر فقط
-                </p>                
-                <div id="contestWinnerBadge" class="hidden text-center mt-3">
+                </p>                <div id="contestWinnerBadge" class="hidden text-center mt-3">
                     <span class="winner-badge">🎉 أنت الفائز! تم إضافة $100</span>
                 </div>
             </div>
@@ -859,6 +861,7 @@
                 <i class="fa-solid fa-right-from-bracket text-xl"></i> تسجيل الخروج
             </button>
         </div>
+        
         <div id="plansPage" class="page">
             <div class="card-header text-center mb-6">
                 <h3 class="card-title">باقات التعدين</h3>
@@ -887,8 +890,7 @@
             <div class="card text-center w-full max-w-[360px]">
                 <div class="card-header text-center mb-6">
                     <h3 class="card-title">إيداع الأموال</h3>
-                    <p class="card-subtitle">أرسل USDT (TRC20)</p>
-                </div>
+                    <p class="card-subtitle">أرسل USDT (TRC20)</p>                </div>
                 <div class="crypto-address" onclick="copyAddress(this)">TTmVnVwGtMm11BkxJA7LYitCgfTqoSN8dw</div>
                 <p class="text-xs text-secondary mb-4">الحد الأدنى للإيداع: $10</p>
                 <input type="number" id="depAmount" placeholder="أدخل مبلغ الإيداع ($)" class="input-style">
@@ -908,7 +910,7 @@
                 <div class="card-header text-center mb-6">
                     <h3 class="card-title">سحب الأرباح</h3>
                     <p class="card-subtitle">سحب إلى محفظتك (TRC20)</p>
-                </div>                
+                </div>
                 <div class="bg-white/5 rounded-xl p-4 mb-4 border border-white/10">
                     <div class="flex items-center justify-between text-sm">
                         <span class="text-secondary">عمولة السحب</span>
@@ -937,8 +939,7 @@
                         <span class="text-danger font-bold" id="commissionAmountDisplay">-$0.00</span>
                     </div>
                     <div class="border-t border-white/10 pt-2 mt-2">
-                        <div class="flex items-center justify-between">
-                            <span class="text-secondary text-sm">سيصلك إلى المحفظة</span>
+                        <div class="flex items-center justify-between">                            <span class="text-secondary text-sm">سيصلك إلى المحفظة</span>
                             <span class="text-success font-bold text-lg" id="receiveAmountDisplay">$0.00</span>
                         </div>
                     </div>
@@ -957,7 +958,8 @@
         <div id="supportPage" class="page">
             <div class="card text-center w-full max-w-[320px] py-12">
                 <i class="fa-brands fa-telegram text-6xl text-secondary mb-6"></i>
-                <h3 class="text-xl font-bold text-secondary mb-3">الدعم الفني</h3>                <p class="text-secondary mb-8">فريق الدعم جاهز لمساعدتك على مدار الساعة</p>
+                <h3 class="text-xl font-bold text-secondary mb-3">الدعم الفني</h3>
+                <p class="text-secondary mb-8">فريق الدعم جاهز لمساعدتك على مدار الساعة</p>
                 <button onclick="window.open('https://t.me/Hassan20005pp_bot')" class="w-full btn-3d py-4 text-sm font-bold flex items-center justify-center gap-3">
                     <i class="fa-brands fa-telegram text-2xl"></i> تواصل مع الدعم
                 </button>
@@ -1184,6 +1186,7 @@
                 alert(userList); showToast("تم عرض المستخدمين ✅", 'success');
             } catch(e) { showToast("خطأ: " + e.message, 'error'); }
         }
+        
         // === COUPON SYSTEM (FIXED) ===
         async function createCoupon() {
             if(userData?.email !== MASTER_ADMIN) { showToast("❌ غير مصرح لك", 'error'); return; }
@@ -1206,8 +1209,7 @@
                     createdBy: userData.id,
                     createdByEmail: userData.email
                 });
-                showToast("✅ تم إنشاء الكوبون: " + code, 'success');
-                document.getElementById('adminCouponCode').value = '';
+                showToast("✅ تم إنشاء الكوبون: " + code, 'success');                document.getElementById('adminCouponCode').value = '';
                 document.getElementById('adminCouponValue').value = '';
                 loadAdminCoupons();
             } catch(e) { console.error('Create coupon error:', e); showToast("❌ خطأ: " + e.message, 'error'); }
@@ -1233,7 +1235,8 @@
                         statusText = 'مستخدم';
                     } else {
                         statusBadge = '<span class="text-accent text-xs">⏳ متاح</span>';
-                        statusText = 'متاح';                    }
+                        statusText = 'متاح';
+                    }
                     const usedInfo = c.usedBy ? `<br><span class="text-xs text-secondary">👤 UID: ${c.usedBy}</span>` : '';
                     const dateStr = c.createdAt ? new Date(c.createdAt).toLocaleDateString('ar-EG') : '';
                     html += `<div class="coupon-item ${c.usedBy ? 'used' : ''}"><div style="text-align: right; flex: 1;"><strong style="color: var(--accent); font-family: monospace;">${c.code}</strong><br><span class="text-secondary">$${c.value} • ${dateStr}${usedInfo}</span><br><span class="text-xs ${c.active ? 'text-success' : 'text-danger'}">الحالة: ${statusText}</span></div><div style="margin-right: 10px;">${statusBadge}</div></div>`;
@@ -1255,8 +1258,7 @@
                     if(Object.keys(updates).length > 0) await db.ref().update(updates);
                 }
                 showToast(`✅ تم حذف ${deleted} كوبون`, 'success'); loadAdminCoupons();
-            } catch(e) { showToast("❌ خطأ: " + e.message, 'error'); }
-        }
+            } catch(e) { showToast("❌ خطأ: " + e.message, 'error'); }        }
 
         // === FIXED REDEEM COUPON ===
         async function redeemCoupon() {
@@ -1282,7 +1284,8 @@
                 
                 const coupon = snap.val();
                 
-                if(coupon.active === false) {                    return showToast("❌ هذا الكوبون غير نشط", 'error');
+                if(coupon.active === false) {
+                    return showToast("❌ هذا الكوبون غير نشط", 'error');
                 }
                 
                 if(coupon.usedBy && coupon.usedBy !== null) {
@@ -1304,8 +1307,7 @@
                 
                 if (!transactionResult.committed) {
                     return showToast("❌ الكوبون أصبح غير متاح (تم استخدامه للتو)", 'error');
-                }
-                
+                }                
                 const couponValue = coupon.value || 0;
                 const newBalance = (userData.balance || 0) + couponValue;
                 const usedCoupons = [...(userData.usedCouponCodes || []), code];
@@ -1331,7 +1333,7 @@
                 updateUI(); 
                 showToast(`🎉 مبروك! تم إضافة $${couponValue} لرصيدك ✨`, 'success');
                 
-                if(codeInput) codeInput.value = '';                
+                if(codeInput) codeInput.value = '';
             } catch(e) { 
                 console.error('Redeem error:', e); 
                 showToast("❌ خطأ في المعالجة: " + e.message, 'error'); 
@@ -1354,12 +1356,11 @@
                     createdAt: coupon.createdAt
                 });
                 return coupon;
-            } catch(e) {
-                console.error('Check coupon error:', e);
+            } catch(e) {                console.error('Check coupon error:', e);
                 return null;
             }
-        }
-        // === CONTEST SYSTEM ===
+
+     // === CONTEST SYSTEM ===
         async function updateContestProgress() {
             if(!userData?.id || !CONTEST_CONFIG.active) return;
             try {
@@ -1408,8 +1409,7 @@
             if(!refId || refId === newUserId) return;
             try {
                 const refSnap = await db.ref('users/' + refId).once('value');
-                if(refSnap.exists()) {
-                    await db.ref('users/' + newUserId).update({ referredBy: parseInt(refId), referredAt: firebase.database.ServerValue.TIMESTAMP });
+                if(refSnap.exists()) {                    await db.ref('users/' + newUserId).update({ referredBy: parseInt(refId), referredAt: firebase.database.ServerValue.TIMESTAMP });
                     await db.ref('users/' + refId).update({ referrals: firebase.database.ServerValue.increment(1) });
                     return true;
                 }
@@ -1458,7 +1458,7 @@
                 const statsMsg = `📊 *إحصائيات العمولات*\n\n📈 إجمالي السحوبات: $${totalWithdrawals.toFixed(2)}\n💰 إجمالي العمولات: $${totalCommission.toFixed(2)}\n👥 عدد المستخدمين: ${usersCount.size}\n📝 عدد العمليات: ${count}\n📊 متوسط العمولة: $${avgCommission.toFixed(2)}`;
                 alert(statsMsg); showToast("✅ تم عرض الإحصائيات", 'success');
             } catch(e) { showToast("❌ خطأ: " + e.message, 'error'); }
-        }
+        }        
         function updateUI() {
             if(!userData) return;
             document.getElementById('pBalance').innerText = (userData.balance || 0).toFixed(2);
@@ -1507,8 +1507,7 @@
             navigator.clipboard.writeText(CRYPTO_ADDRESS).then(function() { showToast("تم نسخ العنوان ✅", 'success'); element.style.borderColor = "var(--success)"; setTimeout(function() { element.style.borderColor = "var(--border)"; }, 1000); });
         }
         
-        function initPlans() {
-            const list = document.getElementById('plansList'); if(!list) return; list.innerHTML = "";
+        function initPlans() {            const list = document.getElementById('plansList'); if(!list) return; list.innerHTML = "";
             plans.forEach(function(plan) {
                 const isCurrent = userData.planId === plan.id; const canAfford = userData.balance >= plan.p;
                 const el = document.createElement('div');
@@ -1554,7 +1553,7 @@
                 } catch(e) { console.error('Logout error:', e); window.location.href = window.location.href.split('?')[0].split('#')[0]; }
             } 
         }
-        async function handleLogin(e) {
+            async function handleLogin(e) {
             e.preventDefault();
             const email = document.getElementById('loginEmail').value.trim().toLowerCase();
             const password = document.getElementById('loginPassword').value;
@@ -1621,7 +1620,9 @@
                             if(userData.email === MASTER_ADMIN) { setTimeout(loadAdminCoupons, 1000); setTimeout(loadCommissionRecords, 2000); }
                             setTimeout(initContestSystem, 1500);
                         } else { localStorage.removeItem('saizone_uid'); localStorage.removeItem('saizone_user'); authContainer.style.display = 'flex'; mainApp.style.display = 'none'; }
-                    }).catch(function(error) { console.error('Firebase error:', error); authContainer.style.display = 'flex'; mainApp.style.display = 'none'; });
+                    }).catch(function(error) { console
+                        
+                        .error('Firebase error:', error); authContainer.style.display = 'flex'; mainApp.style.display = 'none'; });
                 } else { authContainer.style.display = 'flex'; mainApp.style.display = 'none'; if(bottomNav) bottomNav.style.display = 'none'; }
                 const signUpLink = document.querySelector('.SignUpLink'); const signInLink = document.querySelector('.SignInLink');
                 if(signUpLink) signUpLink.addEventListener('click', function(e) { e.preventDefault(); authContainer.classList.add('active'); });
@@ -1631,14 +1632,23 @@
         
         window.addEventListener('resize', function() { const c = document.getElementById('particles'); if(c.children.length < 10) { c.innerHTML = ''; initParticles(); } });
 
-        // PWA Service Worker
+        // ✅ PWA Service Worker - FIXED for GitHub Pages
         if('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(reg => console.log('✅ Service Worker registered', reg))
-                    .catch(err => console.log('❌ Service Worker error', err));
+                // ✅ حساب المسار الديناميكي للمستودع على GitHub Pages
+                const basePath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                const swPath = basePath + 'sw.js';
+                
+                navigator.serviceWorker.register(swPath)
+                    .then(reg => console.log('✅ Service Worker registered:', reg.scope))
+                    .catch(err => console.log('❌ Service Worker error:', err));
             });
         }
+        
+        // ✅ Debug PWA (يمكن حذفه بعد التأكد من العمل)
+        console.log('📍 Current URL:', window.location.href);
+        console.log('📍 Base Path:', window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1));
+        console.log('📍 Manifest href:', document.querySelector('link[rel="manifest"]')?.href);
     </script>
 </body>
 </html>
