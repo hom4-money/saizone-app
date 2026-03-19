@@ -1,24 +1,9 @@
 {
-  "name": "SAIZONE | CLOUD MASTER EDITION",
+  "name": "SAIZONE - Cloud Mining",
   "short_name": "SAIZONE",
-  "description": "منصة التعدين السحابي المتطورة",
-  "start_url": "./index.html",
+  "start_url": "/?source=pwa",
   "display": "standalone",
   "background_color": "#0a0e17",
   "theme_color": "#fdf04c",
-  "orientation": "portrait",
-  "scope": "./",
-  "icons": [
-    {
-      "src": "./icon.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "./icon.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+  "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }, { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }]
 }
