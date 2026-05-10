@@ -1,2 +1,237 @@
-صيانة
-Maintenance
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saizone - قريباً</title>
+    <!-- استدعاء خط Cairo للعربية -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* إعدادات عامة */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* خلفية جمالية */
+        .bg-shape {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(45deg, #2b5876, #4e4376);
+            border-radius: 50%;
+            top: -200px;
+            left: -200px;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .bg-shape-2 {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(45deg, #ff9966, #ff5e62);
+            border-radius: 50%;
+            bottom: -100px;
+            right: -100px;            opacity: 0.1;
+            z-index: -1;
+        }
+
+        /* الحاوية الرئيسية */
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            max-width: 600px;
+            width: 90%;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.5);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* الشعار */
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2b5876;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            display: inline-block;
+        }
+        
+        .logo span {
+            color: #ff5e62;
+        }
+
+        /* النصوص */
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #222;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        /* شريط التقدم */
+        .progress-container {
+            width: 100%;
+            background-color: #e0e0e0;            border-radius: 50px;
+            margin: 20px 0;
+            height: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 75%; /* نسبة الإنجاز */
+            background: linear-gradient(90deg, #2b5876, #4e4376);
+            border-radius: 50px;
+            animation: loadProgress 2s ease-out forwards;
+        }
+
+        /* أيقونة الصيانة المتحركة */
+        .icon-container {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* نموذج الاشتراك */
+        .newsletter {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        input[type="email"] {
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: 1px solid #ddd;
+            width: 60%;
+            font-family: 'Cairo', sans-serif;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        input[type="email"]:focus {
+            border-color: #2b5876;
+            box-shadow: 0 0 5px rgba(43, 88, 118, 0.2);
+        }
+
+        button {
+            padding: 12px 25px;
+            border-radius: 50px;
+            border: none;
+            background: linear-gradient(90deg, #2b5876, #4e4376);
+            color: white;            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(43, 88, 118, 0.3);
+        }
+
+        /* التذييل */
+        .footer {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes loadProgress {
+            from { width: 0; }
+            to { width: 75%; }
+        }
+
+        /* للتجاوب مع الموبايل */
+        @media (max-width: 480px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+            .logo { font-size: 2rem; }
+            h1 { font-size: 1.4rem; }
+            input[type="email"] { width: 100%; }
+            button { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- عناصر الخلفية -->    <div class="bg-shape"></div>
+    <div class="bg-shape-2"></div>
+
+    <div class="container">
+        <!-- أيقونة تعبيرية -->
+        <div class="icon-container">
+            🚀
+        </div>
+
+        <!-- الشعار -->
+        <div class="logo">Sai<span>zone</span></div>
+
+        <!-- العنوان الرئيسي -->
+        <h1>نحن نبني شيئاً عظيماً!</h1>
+
+        <!-- الوصف -->
+        <p>
+            منصة Saizone تخضع حالياً لأعمال صيانة وتطوير لتحسين تجربتكم.<br>
+            سنعود للعمل بشكل كامل قريباً جداً. شكراً لصبركم.
+        </p>
+
+        <!-- شريط التقدم -->
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+        <div style="font-size: 0.8rem; color: #888; margin-bottom: 20px;">نسبة الإنجاز 75%</div>
+
+        <!-- نموذج التنبيه عند العودة -->
+        <form class="newsletter" onsubmit="event.preventDefault(); alert('شكراً! سيتم إشعارك فور الانطلاق.');">
+            <input type="email" placeholder="أدخل بريدك الإلكتروني ليصلك خبر الافتتاح" required>
+            <button type="submit">أعلمني</button>
+        </form>
+
+        <!-- حقوق الملكية -->
+        <div class="footer">
+            &copy; 2026 Saizone Platform. جميع الحقوق محفوظة.
+        </div>
+    </div>
+
+</body>
+</html>
